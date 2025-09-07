@@ -1,0 +1,116 @@
+\documentclass{article}
+
+%%%PACKAGE
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%% \usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage{cite}
+%% \usepackage{enumerate}
+% \usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{systeme}
+%\usepackage{siunitx}
+% \usepackage{multicol}
+% \usepackage{systeme}
+
+% for drawing graphs
+\usepackage{tikz}
+% \tikzset{every picture/.style={thick}}
+\tikzset{every node/.style={draw, circle, inner sep = 2pt}}
+\usetikzlibrary{arrows}
+
+% for margins
+\usepackage[margin=1in]{geometry}
+
+% for font
+\usepackage{euler}
+\usepackage[OT1]{eulervm}
+\renewcommand{\rmdefault}{pplx}
+
+% \setlength{\parindent}{0pt}  %no indenting
+
+% MACROS
+\newcommand{\trans}{^\top}
+\newcommand{\adj}{^{\rm adj}}
+\newcommand{\cof}{^{\rm cof}}
+\newcommand{\inp}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\dunion}{\mathbin{\dot\cup}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+%\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Col}{\operatorname{Col}}
+\newcommand{\Row}{\operatorname{Row}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\vspan}{\operatorname{span}}
+% \newenvironment{sol}{\medskip\noindent {\bf Solution.}}{\newpage}
+\newcommand{\mystrut}{\rule[-.5\baselineskip]{0pt}{2\baselineskip}}
+% \newcommand{\mul}{\operatorname{mul}}
+\newcommand{\even}{\operatorname{even}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\iner}{\operatorname{iner}}
+
+%%%COMMENT
+\usepackage{soul}
+\usepackage{cancel}
+\newcommand{\rbf}[1]{\textbf{\color{red}#1}}
+
+%%%THEOREM
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{question}[theorem]{Question}
+
+% for title
+\title{Walk}
+\date{\vspace{-1cm}}
+\begin{document}
+\maketitle
+\large
+
+Let $G$ be a simple graph.  The \emph{adjacency matrix} of $G$ is $A(G) = \begin{bmatrix} a_{ij} \end{bmatrix}$ such that $a_{ij} = 1$ if and only if $\{i,j\}\in E(G)$.  Naturally, the digraph $\Gamma(G)$ of $G$ is a weighted digraph obtained from $G$ by replacing each edge with a pair of doubly directed edges, where each edge has weight $1$.  Equivalent, $\Gamma(G)$ is the digraph of $A(G)$.
+
+Let $G$ be a simple graph on vertex set $[n]$ and $A$ its adjacency matrix.  Then 
+\[A\bone = (d_1,\ldots,d_n)\trans,\]
+where $\bone\in\mathbb{R}^n$ is the all-ones vector and $d_i$ is the degree of vertex $i$ in $G$.  On the other hand, the $i,j$-entry of $A^r$ is the number of walks from $i$ to $j$ of length $r$.  
+  
+\section*{Problems}
+For the following problems, $G$ is a graph on the vertex set $[n]$ and $A$ is its adjacency matrix.
+\begin{enumerate}
+\setlength\itemsep{2em}
+\item Draw a graph and find its adjacency matrix.
+\item If $G$ is $k$-regular, what can you say about $A\bone$?  Is there any obvious eigenvalue and eigenvector?
+\item Let $\alpha\subseteq[n]$.  Explain the meaning of $A\bone_\alpha$, where $\bone_\alpha$ is the characteristic vector of $\alpha$ that is $1$ on $\alpha$ and $0$ otherwise.  
+\item What is the meaning of the diagonal entries of $A^2$?  Describe $\tr(A^2)$ using the number of edges $m$ of $G$.
+\item What is the meaning of the diagonal entries of $A^3$?  Describe $\tr(A^3)$ using the number of triangles $t$ of $G$.
+\item Prove by induction that the $i,j$-entry of $A^r$ is the number of walks from $i$ to $j$ of length $r$.
+\end{enumerate}
+
+% \newpage
+% \section*{Questions to ponder}
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+
+\end{document}

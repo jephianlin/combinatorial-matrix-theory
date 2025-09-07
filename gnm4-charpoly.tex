@@ -1,0 +1,127 @@
+\documentclass{article}
+
+%%%PACKAGE
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%% \usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage{cite}
+%% \usepackage{enumerate}
+% \usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{systeme}
+%\usepackage{siunitx}
+% \usepackage{multicol}
+% \usepackage{systeme}
+
+% for drawing graphs
+\usepackage{tikz}
+% \tikzset{every picture/.style={thick}}
+\tikzset{every node/.style={draw, circle, inner sep = 2pt}}
+\usetikzlibrary{arrows}
+
+% for margins
+\usepackage[margin=1in]{geometry}
+
+% for font
+\usepackage{euler}
+\usepackage[OT1]{eulervm}
+\renewcommand{\rmdefault}{pplx}
+
+% \setlength{\parindent}{0pt}  %no indenting
+
+% MACROS
+\newcommand{\trans}{^\top}
+\newcommand{\adj}{^{\rm adj}}
+\newcommand{\cof}{^{\rm cof}}
+\newcommand{\inp}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\dunion}{\mathbin{\dot\cup}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+%\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Col}{\operatorname{Col}}
+\newcommand{\Row}{\operatorname{Row}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\vspan}{\operatorname{span}}
+% \newenvironment{sol}{\medskip\noindent {\bf Solution.}}{\newpage}
+\newcommand{\mystrut}{\rule[-.5\baselineskip]{0pt}{2\baselineskip}}
+% \newcommand{\mul}{\operatorname{mul}}
+\newcommand{\even}{\operatorname{even}}
+\newcommand{\sgn}{\operatorname{sgn}}
+
+%%%COMMENT
+\usepackage{soul}
+\usepackage{cancel}
+\newcommand{\rbf}[1]{\textbf{\color{red}#1}}
+
+%%%THEOREM
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{question}[theorem]{Question}
+
+% for title
+\title{Characteristic polynomial}
+\date{\vspace{-1cm}}
+\begin{document}
+\maketitle
+\large
+
+Let $A = \begin{bmatrix} a_{ij} \end{bmatrix}$ be an $n\times n$ matrix.  The \emph{characteristic polynomial} of $A$ is defined as 
+\[\det(A - xI) = S_0(-x)^n + S_1(-x)^{n-1} + \cdots + S_n.\]
+It is well-known that $S_0 = 1$, $S_1 = \tr(A)$, and $S_n = \det(A)$.  The other coefficients can also be written as the sum of principal minors.
+
+Let $\alpha\subset[n]$.  Then $A[\alpha]$ is the submatrix induced on the rows in $\alpha$ and columns in $\alpha$.  Such a matrix is called a \emph{principal submatrix} and its determinant is called a \emph{principal minor}.  It is known that
+\[S_k = \sum_{\substack{\alpha\subseteq [n]\\|\alpha| = k}} \det(A[\alpha]).\]
+
+Let $\Gamma_A$ be the digraph of $A$.  Then $\alpha$ can be viewed as a subset of vertices of $\Gamma_A$.  An \emph{elementary subgraph of $\Gamma_A$ on $\alpha$} is a subgraph on $\alpha$ such that each vertex has in-degree $1$ and out-degree $1$ (equivalently, each component is either a loop, a doubly directed edges, or a cycle).  Let $H$ be an elementary subgraph of $\Gamma_A$.  Define $c(H)$ as the number of components of $H$.  The \emph{sign} of $H$ is $\sgn(H) = (-1)^{|\alpha|+c(H)}$.  The weight of $H$ is the product of the weights of its edges, denoted by $w(H)$.  
+The set of all elementary subgraphs is denoted by $\mathfrak{E}_\alpha$, while $\mathfrak{E}_k = \bigcup_{\substack{\alpha\subseteq [n]\\|\alpha| = k}}\mathfrak{E}_\alpha$.  
+Consequently, 
+\[S_k = \sum_{H\in\mathfrak{E}_k} \sgn(H)w(H) = \sum_{H\in\mathfrak{E}_k}(-1)^{k+c(H)}w(H).\]
+
+\section*{Problems}
+\begin{enumerate}
+\setlength\itemsep{2em}
+\item Write a $4\times 4$ matrix.  Calculate $S_0,\ldots, S_4$ by its principal minors.
+\item Use the same $A$ you had, draw the digraph and calculate $S_0,\ldots, S_4$ by the digraph.
+\item Calculate the characteristic polynomial of  
+\[A = \begin{bmatrix} 
+ 0 & 1 & 0 & 0 & 0 & 0 \\
+ 1 & 0 & 1 & 0 & 0 & 0 \\
+ 0 & 1 & 0 & 1 & 0 & 0 \\
+ 0 & 0 & 1 & 0 & 1 & 0 \\
+ 0 & 0 & 0 & 1 & 0 & 1 \\
+ 0 & 0 & 0 & 0 & 1 & 0 \\
+\end{bmatrix}\] 
+by the digraph.
+\item When the matrix $A$ is symmetric and $\alpha\subseteq[n]$, how would you define the elementary subgraph on $\alpha$ of the simple graph of $A$?  How to calculate $S_k$?  What if $A$ is a symmetric matrix with zero diagonal?
+\end{enumerate}
+
+% \newpage
+% \section*{Questions to ponder}
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+
+\end{document}

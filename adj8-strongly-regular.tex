@@ -1,0 +1,128 @@
+\documentclass{article}
+
+%%%PACKAGE
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%% \usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage{cite}
+%% \usepackage{enumerate}
+% \usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{systeme}
+%\usepackage{siunitx}
+% \usepackage{multicol}
+% \usepackage{systeme}
+
+% for drawing graphs
+\usepackage{tikz}
+% \tikzset{every picture/.style={thick}}
+\tikzset{every node/.style={draw, circle, inner sep = 2pt}}
+\usetikzlibrary{arrows}
+
+% for margins
+\usepackage[margin=1in]{geometry}
+
+% for font
+\usepackage{euler}
+\usepackage[OT1]{eulervm}
+\renewcommand{\rmdefault}{pplx}
+
+% \setlength{\parindent}{0pt}  %no indenting
+
+% MACROS
+\newcommand{\trans}{^\top}
+\newcommand{\adj}{^{\rm adj}}
+\newcommand{\cof}{^{\rm cof}}
+\newcommand{\inp}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\dunion}{\mathbin{\dot\cup}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+%\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Col}{\operatorname{Col}}
+\newcommand{\Row}{\operatorname{Row}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\vspan}{\operatorname{span}}
+% \newenvironment{sol}{\medskip\noindent {\bf Solution.}}{\newpage}
+\newcommand{\mystrut}{\rule[-.5\baselineskip]{0pt}{2\baselineskip}}
+% \newcommand{\mul}{\operatorname{mul}}
+\newcommand{\even}{\operatorname{even}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\iner}{\operatorname{iner}}
+
+%%%COMMENT
+\usepackage{soul}
+\usepackage{cancel}
+\newcommand{\rbf}[1]{\textbf{\color{red}#1}}
+
+%%%THEOREM
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{question}[theorem]{Question}
+
+% for title
+\title{Strongly regular graph}
+\date{\vspace{-1cm}}
+\begin{document}
+\maketitle
+\large
+
+A simple graph $G$ is \emph{strongly regular} if there are parameters $v,k,\lambda,\mu$ such that \begin{itemize}
+\item $G$ has $v$ vertices,
+\item $G$ is $k$-regular, 
+\item for each pair of adjacent vertices, they have exactly $\lambda$ common neighbors, and 
+\item for each pair of non-adjacent vertices, they have exactly $\mu$ common neighbors.
+\end{itemize}
+
+Let $G$ be a strongly regular graph with parameters $v,k,\lambda,\mu$ and $A$ its adjacency matrix.  Then 
+\[A^2 = kI + \lambda A + \mu(J - I - A),\]
+where $J$ is the $v\times v$ all-ones matrix.
+Since $G$ is $k$-regular, $A\bone = k\bone$ and 
+\[k^2 = k + \lambda k + \mu(v - 1 - k).\]
+We may assume other eigenvectors are orthogonal to $\bone$.  Let $\bu$ be an eigenvector with respect to eigenvalue $\theta$ such that $\bu\perp\bone$.  Then 
+\[\theta^2 = k + \lambda\theta + \mu(-1 - \theta),\] 
+so 
+\[\theta = \frac{\lambda - \mu \pm \sqrt{(\mu - \lambda)^2 - 4(\mu - k)}}{2}.\]
+
+
+\section*{Problems}
+\begin{enumerate}
+\setlength\itemsep{2em}
+% \item Is $K_n$ a strongly regular graph?  If so, what are $v,k,\lambda,\mu$?
+\item Is $C_n$ a strongly regular graph?  If so, what are $v,k,\lambda,\mu$?
+\item Is the Petersen graph a strongly regular graph?  If so, what are $v,k,\lambda,\mu$?
+\item Find the adjacency eigenvalues of the Petersen graph without using the formula.
+\item Let $G$ be a strongly regular graph and $i$ a vertex of $G$.  Let $X$ and $Y$ be the vertices that are adjacent and not adjacent to $i$.  Count the number of edges between $X$ and $Y$ and show that
+\[k(k - 1 - \lambda) = \mu(v - k - 1).\]
+\item Use any online resources if necessary, find the multiplicities of the adjacency eigenvalues of a strongly regular graph.
+\end{enumerate}
+
+% \newpage
+% \section*{Questions to ponder}
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+
+\end{document}

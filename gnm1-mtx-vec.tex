@@ -1,0 +1,116 @@
+\documentclass{article}
+
+%%%PACKAGE
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%% \usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage{cite}
+%% \usepackage{enumerate}
+% \usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{systeme}
+%\usepackage{siunitx}
+% \usepackage{multicol}
+% \usepackage{systeme}
+
+% for drawing graphs
+\usepackage{tikz}
+% \tikzset{every picture/.style={thick}}
+\tikzset{every node/.style={draw, circle, inner sep = 2pt}}
+\usetikzlibrary{arrows}
+
+% for margins
+\usepackage[margin=1in]{geometry}
+
+% for font
+\usepackage{euler}
+\usepackage[OT1]{eulervm}
+\renewcommand{\rmdefault}{pplx}
+
+% \setlength{\parindent}{0pt}  %no indenting
+
+% MACROS
+\newcommand{\trans}{^\top}
+\newcommand{\adj}{^{\rm adj}}
+\newcommand{\cof}{^{\rm cof}}
+\newcommand{\inp}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\dunion}{\mathbin{\dot\cup}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+%\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Col}{\operatorname{Col}}
+\newcommand{\Row}{\operatorname{Row}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\vspan}{\operatorname{span}}
+% \newenvironment{sol}{\medskip\noindent {\bf Solution.}}{\newpage}
+\newcommand{\mystrut}{\rule[-.5\baselineskip]{0pt}{2\baselineskip}}
+% \newcommand{\mul}{\operatorname{mul}}
+
+%%%COMMENT
+\usepackage{soul}
+\usepackage{cancel}
+\newcommand{\rbf}[1]{\textbf{\color{red}#1}}
+
+%%%THEOREM
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{question}[theorem]{Question}
+
+% for title
+\title{Matrix-vector multiplication}
+\date{\vspace{-1cm}}
+\begin{document}
+\maketitle
+\large
+
+Let $A = \begin{bmatrix} a_{ij}\end{bmatrix}$ be an $n\times n$ matrix and $\bx = (x_1,\ldots, x_n)\trans$ a column vector in $\mathbb{R}^n$.  Then $A\bx$ is another vector in $\mathbb{R}^n$ whose $i$-th entry is 
+\[\sum_{k\in[n]}a_{ik}x_k.\]
+Here $[n] = \{1,\ldots, n\}$.  
+
+Based on an $n\times n$ square matrix $A$, we may define a digraph $\Gamma$ whose vertex set is $V(\Gamma) = [n]$ and whose edge set is 
+\[E(\Gamma) = \{(i,j) : a_{i,j}\neq 0\}.\]
+The digraph $\Gamma$ is called the \emph{digraph of $A$}.  (Note that digraphs allow loops.)  The \emph{out-neighborhood} of a vertex $i$ of $\Gamma$ is 
+\[N^+_\Gamma(i) = \{k : (i,k) \in E(\Gamma)\}.\]
+We often write $N^+(i)$ when the digraph is clear in the context.
+Thus, the matrix-vector multiplication can be simplified such that the $i$-th entry of $A\bx$ is 
+\[\sum_{k\in N^+_\Gamma(i)}a_{ik}x_k.\]
+This is particularly useful when the matrix is sparse.
+
+\section*{Problems}
+\begin{enumerate}
+\setlength\itemsep{2em}
+\item Write a $4\times 4$ matrix $A$ and a vector $\bx$ in $\mathbb{R}^4$.  Draw the digraph of $A$.  Calculate $A\bx$ by the digraph.
+\item When the matrix $A$ is symmetric, how would you define the ``simple'' graph of $A$?  How does the matrix-vector multiplication work?  What if $A$ is a symmetric matrix with zero diagonal?  (You might need to define the closed and open neighborhood on a simple graph.)
+\item A \emph{permutation matrix} is a matrix where there is exactly a $1$ on each row and on each column.  Pick a permutation matrix and draw its digraph.  Describe some features of the digraph of a permutation matrix.
+\end{enumerate}
+
+% \newpage
+% \section*{Questions to ponder}
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+
+\end{document}

@@ -1,0 +1,128 @@
+\documentclass{article}
+
+%%%PACKAGE
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%% \usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage{cite}
+%% \usepackage{enumerate}
+% \usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{systeme}
+%\usepackage{siunitx}
+% \usepackage{multicol}
+% \usepackage{systeme}
+
+% for drawing graphs
+\usepackage{tikz}
+% \tikzset{every picture/.style={thick}}
+\tikzset{every node/.style={draw, circle, inner sep = 2pt}}
+\usetikzlibrary{arrows}
+
+% for margins
+\usepackage[margin=1in]{geometry}
+
+% for font
+\usepackage{euler}
+\usepackage[OT1]{eulervm}
+\renewcommand{\rmdefault}{pplx}
+
+% \setlength{\parindent}{0pt}  %no indenting
+
+% MACROS
+\newcommand{\trans}{^\top}
+\newcommand{\adj}{^{\rm adj}}
+\newcommand{\cof}{^{\rm cof}}
+\newcommand{\inp}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\dunion}{\mathbin{\dot\cup}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+%\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Col}{\operatorname{Col}}
+\newcommand{\Row}{\operatorname{Row}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\vspan}{\operatorname{span}}
+% \newenvironment{sol}{\medskip\noindent {\bf Solution.}}{\newpage}
+\newcommand{\mystrut}{\rule[-.5\baselineskip]{0pt}{2\baselineskip}}
+% \newcommand{\mul}{\operatorname{mul}}
+\newcommand{\even}{\operatorname{even}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\iner}{\operatorname{iner}}
+
+%%%COMMENT
+\usepackage{soul}
+\usepackage{cancel}
+\newcommand{\rbf}[1]{\textbf{\color{red}#1}}
+
+%%%THEOREM
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{question}[theorem]{Question}
+
+% for title
+\title{Bipartite graphs}
+\date{\vspace{-1cm}}
+\begin{document}
+\maketitle
+\large
+
+Recall that a graph $G$ is a bipartite graph if $V(G)$ can be partitioned as $X\dunion Y$ such that all edges are between $X$ and $Y$.  Equivalently, $G$ is a bipartite graph if and only if the adjacency matrix of $G$ can be written as 
+\[A = \begin{bmatrix}
+ O_{|X|} & B\trans \\
+ B & O_{|Y|}
+\end{bmatrix}.\]
+Suppose $A$ has an eigenvector $\bv$ with respect to the eigenvalue $\lambda$.  Then the equation $A\bv = \lambda\bv$ is equivalent to 
+\[\begin{aligned}
+B\bx &= \lambda\by, \\
+B\trans\by &= \lambda\bx,
+\end{aligned} \text{ where } 
+\bv = \begin{bmatrix} \bx \\ \by \end{bmatrix}.\]
+Direct computation leads to the relation that 
+\[A\begin{bmatrix} \bx \\ \by \end{bmatrix} = \lambda\begin{bmatrix} \bx \\ \by \end{bmatrix} \iff 
+A\begin{bmatrix} \bx \\ -\by \end{bmatrix} = -\lambda\begin{bmatrix} \bx \\ -\by \end{bmatrix}.\]
+Therefore, if $\lambda$ is an eigenvalue of $A$, then $-\lambda$ is also an eigenvalue of $A$ of the same multiplicity.  
+
+In fact, if a graph $G$ with adjacency matrix $A$ has its adjacency eigenvalues symmetric to $0$, then we know $G$ is a bipartite graph for the following reasons.  Since the eigenvalues are symmetric to $0$, we know the adjacency characteristic polynomial of $G$ has the form 
+\[p(x) = (-x)^k\prod_{\lambda}(\lambda - x)(-\lambda - x) = (-x)^k\prod_{\lambda}(\lambda^2 - x^2),\]
+where $k$ is the nullity of $A$ and $\lambda$ runs through all positive eigenvalues of $A$, counting the multiplicity.  Therefore, $p(x) / x^k$ is a even function,  which means $S_1 = S_3 = \cdots = 0$.  Since $S_3 = 0$, $G$ contains no triangle $C_3$.  Since $G$ contains no $C_3$ and $S_5 = 0$, $G$ contains no $C_5$.  Inductively, we know $G$ contains no odd cycles.  It is well-known that if $G$ contains no odd cycles, then $G$ is a bipartite graph.
+
+\section*{Problems}
+\begin{enumerate}
+\setlength\itemsep{2em}
+\item Let $G = K_{1,3}$ and $A$ its adjacency matrix.  Find the characteristic polynomial, the eigenvalues, an eigenbasis of $A$.  
+\item Let $G = K_{2,2}$ and $A$ its adjacency matrix.  Find the characteristic polynomial, the eigenvalues, an eigenbasis of $A$.  
+\item Explain why the adjacency matrix of a bipartite graph on odd number of vertices is always singular.
+\item Find the eigenvalue and an eigenbasis for the adjacency matrix of a complete graph $K_{m,n}$.  
+\item Let $k$ be the smallest positive odd integer such that $S_k \neq 0$.  Prove that the shortest odd cycle on $G$ has length $k$.
+\end{enumerate}
+
+% \newpage
+% \section*{Questions to ponder}
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+
+\end{document}

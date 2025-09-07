@@ -1,0 +1,120 @@
+\documentclass{article}
+
+%%%PACKAGE
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%% \usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage{cite}
+%% \usepackage{enumerate}
+% \usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{systeme}
+%\usepackage{siunitx}
+% \usepackage{multicol}
+% \usepackage{systeme}
+
+% for drawing graphs
+\usepackage{tikz}
+% \tikzset{every picture/.style={thick}}
+\tikzset{every node/.style={draw, circle, inner sep = 2pt}}
+\usetikzlibrary{arrows}
+
+% for margins
+\usepackage[margin=1in]{geometry}
+
+% for font
+\usepackage{euler}
+\usepackage[OT1]{eulervm}
+\renewcommand{\rmdefault}{pplx}
+
+% \setlength{\parindent}{0pt}  %no indenting
+
+% MACROS
+\newcommand{\trans}{^\top}
+\newcommand{\adj}{^{\rm adj}}
+\newcommand{\cof}{^{\rm cof}}
+\newcommand{\inp}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\dunion}{\mathbin{\dot\cup}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\be}{\mathbf{e}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+%\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Col}{\operatorname{Col}}
+\newcommand{\Row}{\operatorname{Row}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\vspan}{\operatorname{span}}
+% \newenvironment{sol}{\medskip\noindent {\bf Solution.}}{\newpage}
+\newcommand{\mystrut}{\rule[-.5\baselineskip]{0pt}{2\baselineskip}}
+% \newcommand{\mul}{\operatorname{mul}}
+\newcommand{\even}{\operatorname{even}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\iner}{\operatorname{iner}}
+\newcommand{\rL}{\mathring{L}}
+
+%%%COMMENT
+\usepackage{soul}
+\usepackage{cancel}
+\newcommand{\rbf}[1]{\textbf{\color{red}#1}}
+
+%%%THEOREM
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{question}[theorem]{Question}
+
+% for title
+\title{Bottleneck matrix}
+\date{\vspace{-1cm}}
+\begin{document}
+\maketitle
+\large
+
+A \emph{rooted tree} is a tree $T$ with one of its vertex $v$ designated as the root.  Let $(T,v)$ be a rooted tree on $n$ vertices and $L$ its Laplacian matrix.  The \emph{Dirichlet operator} of $(T,v)$ is the matrix $\rL(T,v)$ obtained from $L$ by adding $1$ to the $v,v$-entry.  On the other hand, the \emph{bottleneck matrix} of $(T,v)$ is the matrix $B(T,v) = \begin{bmatrix} b_{ij} \end{bmatrix}$ such that $b_{ij}$ is the number of common vertices between the path from $i$ to $v$ and the path from $j$ to $v$.  It is known that $B(T,v)$ is the inverse of $\rL(T,v)$.  
+
+Let $G$ be a graph and $L$ its Laplacian matrix.  Let $\alpha,\beta\subseteq V(G)$ be two subsets of vertices with $|\alpha| = |\beta| = k$ and $L(\alpha,\beta)$ the submatrix of $L$ obtained from $L$ by removing the rows in $\alpha$ and the columns in $\beta$.  The \textbf{all minors matrix tree theorem} states that $|\det(L(\alpha,\beta))|$ is the number of spanning forest that has exactly $k$ components and each component contains exactly one of the vertices in $\alpha$ and exactly one of the vertices in $\beta$.  (The sign of $\det(L(\alpha,\beta))$ can also be determined, but we do not really need it here.) 
+
+Let $(T,v)$ be a rooted tree and $\rL$ its Dirichlet operator.  Let $T'$ be the tree obtained from $T$ by attaching a new vertex $u$ to $v$, and let $L$ be the Laplacian matrix of $T'$.  Thus, $L(\{u\},\{u\}) = \rL$ and has determinant $1$ by the matrix tree theorem.  Since $\rL$ is positive definite and all of its off-diagonal entries are negative or zero, $\rL$ is entrywisely positive. (why?)  Therefore, the $i,j$-th entry of $\rL^{-1}$ is 
+\[\left|\frac{\det(\rL(\{j\},\{i\}))}{\det(\rL)}\right| = 
+\left|\frac{\det(L(\{u,j\},\{u,i\}))}{1}\right|
+,\]
+which is the same as the bottleneck matrix of $(T,v)$.
+
+\section*{Problems}
+\begin{enumerate}
+\setlength\itemsep{2em}
+\item Pick a rooted tree on $4$ vertices.  Find its Dirichlet operator and its bottleneck matrix. 
+\item Let $(P_4,v)$ be a rooted tree where $v$ is one of the endpoints of $P_4$.  Find its Dirichlet operator and its bottleneck matrix. 
+\item Let $(K_{1,3},v)$ be a rooted tree where $v$ is the center vertex.  Find its Dirichlet operator and its bottleneck matrix. 
+\item Use Rayleigh quotient to show that the Dirichlet operator of a rooted tree is always positive definite and invertible.
+\item Prove that the inverse of the Dirichlet operator of a rooted tree is entrywisely positive.  [Hint: If $A$ is symmetric and its eigenvalues are in $(0,1)$, then $(I - A)^{-1} = I + A + A^2 + \cdots$.] 
+\end{enumerate}
+
+% \newpage
+% \section*{Questions to ponder}
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+
+\end{document}

@@ -1,0 +1,128 @@
+\documentclass{article}
+
+%%%PACKAGE
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%% \usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage{cite}
+%% \usepackage{enumerate}
+% \usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{systeme}
+%\usepackage{siunitx}
+% \usepackage{multicol}
+% \usepackage{systeme}
+
+% for drawing graphs
+\usepackage{tikz}
+% \tikzset{every picture/.style={thick}}
+\tikzset{every node/.style={draw, circle, inner sep = 2pt}}
+\usetikzlibrary{arrows}
+
+% for margins
+\usepackage[margin=1in]{geometry}
+
+% for font
+\usepackage{euler}
+\usepackage[OT1]{eulervm}
+\renewcommand{\rmdefault}{pplx}
+
+% \setlength{\parindent}{0pt}  %no indenting
+
+% MACROS
+\newcommand{\trans}{^\top}
+\newcommand{\adj}{^{\rm adj}}
+\newcommand{\cof}{^{\rm cof}}
+\newcommand{\inp}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\dunion}{\mathbin{\dot\cup}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+%\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Col}{\operatorname{Col}}
+\newcommand{\Row}{\operatorname{Row}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\vspan}{\operatorname{span}}
+% \newenvironment{sol}{\medskip\noindent {\bf Solution.}}{\newpage}
+\newcommand{\mystrut}{\rule[-.5\baselineskip]{0pt}{2\baselineskip}}
+% \newcommand{\mul}{\operatorname{mul}}
+\newcommand{\even}{\operatorname{even}}
+\newcommand{\sgn}{\operatorname{sgn}}
+
+%%%COMMENT
+\usepackage{soul}
+\usepackage{cancel}
+\newcommand{\rbf}[1]{\textbf{\color{red}#1}}
+
+%%%THEOREM
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{question}[theorem]{Question}
+
+% for title
+\title{Determinant}
+\date{\vspace{-1cm}}
+\begin{document}
+\maketitle
+\large
+
+A \emph{permutation} on $[n]$ is a bijection on $[n]$.  Let $\sigma$ be a permutation on $[n]$.  Define $c(\sigma)$ as the number of cycles of $\sigma$ in its cycle representation.  
+The \emph{permutation matrix} of $\sigma$ is the $n\times n$ matrix $P_\sigma$ whose $i,\sigma(i)$-entry is $1$ for $i = 1,\ldots, n$ while others are $0$.  The \emph{sign} of $\sigma$ defined as $\sgn(\sigma) = \det(P_\sigma)$.  It is known that $\sgn(\sigma) = (-1)^{n + c(\sigma)}$.  The set (group) of all permutations on $[n]$ is denoted by $\mathfrak{S}_n$.
+
+Let $A = \begin{bmatrix} a_{ij} \end{bmatrix}$ be an $n\times n$ matrix.  Then 
+\[\det(A) = 
+\sum_{\sigma\in\mathfrak{S}_n} \sgn(\sigma)a_{1\sigma(1)}\cdots a_{n\sigma(n)} = 
+\sum_{\sigma\in\mathfrak{S}_n} (-1)^{n+c(\sigma)}w(\sigma),\]
+where $w(\sigma) = a_{1\sigma(1)}\cdots a_{n\sigma(n)}$ can be viewed as the weight of $\sigma$ defined by $A$.
+
+Let $\Gamma_A$ be the weighted digraph of $A$.  An \emph{elementary subgraph} of $\Gamma_A$ is a spanning subgraph of $\Gamma_A$ such that each vertex has in-degree $1$ and out-degree $1$ (equivalently, each component is either a loop, a doubly directed edges, or a cycle).  Let $H$ be an elementary subgraph of $\Gamma_A$.  Define $c(H)$ as the number of components of $H$.  The \emph{sign} of $H$ is $\sgn(H) = (-1)^{n+c(H)}$.  The weight of $H$ is the product of the weights of its edges, denoted by $w(H)$.  
+The set of all elementary subgraphs is denoted by $\mathfrak{E}$.  Consequently, 
+\[\det(A) = \sum_{H\in\mathfrak{E}} \sgn(H)w(H) = \sum_{H\in\mathfrak{E}}(-1)^{n+c(H)}w(H).\]
+
+\section*{Problems}
+\begin{enumerate}
+\setlength\itemsep{2em}
+\item Write a $4\times 4$ matrix.  List all elements in $\mathfrak{S}_4$ and calculate the determinant by the permutation expansion.
+\item Use the same $A$ you had, draw the digraph, list all graphs in $\mathfrak{E}$, and calculate the determinant by the digraph.
+\item Calculate the determinant of  
+\[A = \begin{bmatrix} 
+ 0 & 1 & 0 & 0 & 0 & 0 \\
+ 1 & 0 & 1 & 0 & 0 & 0 \\
+ 0 & 1 & 0 & 1 & 0 & 0 \\
+ 0 & 0 & 1 & 0 & 1 & 0 \\
+ 0 & 0 & 0 & 1 & 0 & 1 \\
+ 0 & 0 & 0 & 0 & 1 & 0 \\
+\end{bmatrix}\] 
+by the digraph.
+\item When the matrix $A$ is symmetric, how would you define the elementary subgraph of the simple graph of $A$?  How to calculate $\det(A)$?  What if $A$ is a symmetric matrix with zero diagonal?
+\end{enumerate}
+
+% \newpage
+% \section*{Questions to ponder}
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+
+\end{document}

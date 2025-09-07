@@ -1,0 +1,135 @@
+\documentclass{article}
+
+%%%PACKAGE
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%% \usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage{cite}
+%% \usepackage{enumerate}
+% \usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{systeme}
+%\usepackage{siunitx}
+% \usepackage{multicol}
+% \usepackage{systeme}
+
+% for drawing graphs
+\usepackage{tikz}
+% \tikzset{every picture/.style={thick}}
+\tikzset{every node/.style={draw, circle, inner sep = 2pt}}
+\usetikzlibrary{arrows}
+
+% for margins
+\usepackage[margin=1in]{geometry}
+
+% for font
+\usepackage{euler}
+\usepackage[OT1]{eulervm}
+\renewcommand{\rmdefault}{pplx}
+
+% \setlength{\parindent}{0pt}  %no indenting
+
+% MACROS
+\newcommand{\trans}{^\top}
+\newcommand{\adj}{^{\rm adj}}
+\newcommand{\cof}{^{\rm cof}}
+\newcommand{\inp}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\dunion}{\mathbin{\dot\cup}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+%\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Col}{\operatorname{Col}}
+\newcommand{\Row}{\operatorname{Row}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\vspan}{\operatorname{span}}
+% \newenvironment{sol}{\medskip\noindent {\bf Solution.}}{\newpage}
+\newcommand{\mystrut}{\rule[-.5\baselineskip]{0pt}{2\baselineskip}}
+% \newcommand{\mul}{\operatorname{mul}}
+\newcommand{\even}{\operatorname{even}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\iner}{\operatorname{iner}}
+
+%%%COMMENT
+\usepackage{soul}
+\usepackage{cancel}
+\newcommand{\rbf}[1]{\textbf{\color{red}#1}}
+
+%%%THEOREM
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{question}[theorem]{Question}
+
+% for title
+\title{Characteristic polynomial}
+\date{\vspace{-1cm}}
+\begin{document}
+\maketitle
+\large
+
+Let $G$ be a graph on $n$ vertices and $A$ its adjacency matrix.  The \emph{adjacency characteristic polynomial} of $G$ is 
+\[\det(A - xI) = S_0(-x)^n + S_1(-x)^{n-1} + \cdots + S_n.\]
+Each of $S_k$ can be calculated by combinatorial properties of $\Gamma(G)$ as
+\[S_k = \sum_{H\in\mathfrak{E}_k(\Gamma(G))} \sgn(H)w(H) = \sum_{H\in\mathfrak{E}_k(\Gamma(G))}(-1)^{k+c(H)}w(H).\]
+All we need to do is to translate the digraph setting into the setting of simple graph $G$.  
+
+Let $\alpha\subseteq[n]$ with $|\alpha| = k$.  An elementary subgraph of $\Gamma(G)$ on $\alpha$ corresponds to a subgraph of $G$ on $\alpha$ whose components are either $K_2$ or a cycle.  A such subgraph is called an \emph{elementary subgraph of $G$ on $\alpha$}.  Let $\mathfrak{E}_\alpha(G)$ be the set of all elementary subgraph of $G$ on $\alpha$ and define $\mathfrak{E}_k(G) = \bigcup_{\substack{\alpha\subseteq [n]\\|\alpha| = k}}\mathfrak{E}_\alpha(G)$.    
+
+For any $H\in\mathfrak{G}_\alpha(G)$, let $c(H)$ be the number of components of $H$, $c_2(H)$ be the number of components that is $K_2$, and $c_3(H)$ be the number of components that is a cycle (of length $\geq 3$).  Thus, each $H$ corresponds to $2^{c_3(H)}$ elementary subgraphs of $\Gamma$ on $\alpha$, each has weight $1$ and sign $(-1)^{k + c(H)}$.  Therefore, 
+\[S_k = \sum_{H\in\mathfrak{E}_k(\Gamma(G))} \sgn(H)w(H) = \sum_{H\in\mathfrak{E}_k(G)}(-1)^{k+c(H)}2^{c_3(H)}.\]
+
+In particular, 
+\[\begin{aligned}
+S_0 &= 1, \\
+S_1 &= 0, \\
+S_2 &= -m, \\
+S_3 &= 2t,
+\end{aligned}\]
+where $m$ is the number of edges on $G$ and $t$ is the number of triangles on $G$.
+
+On the other hand, 
+\[\begin{aligned}
+\tr(A) &= 0 = S_1, \\
+\tr(A^2) &= 2m = -2S_2, \\
+\tr(A^3) &= 6t = 3S_3.
+\end{aligned}\]
+
+\section*{Problems}
+\begin{enumerate}
+\setlength\itemsep{2em}
+\item Pick a simple graph on $4$ vertices, list all elements in $\mathfrak{E}_k(G)$ for each $k = 0,1,2,3,4$, and calculate the adjacency characteristic polynomial of $G$ using the elementary subgraphs.
+\item Use the formula for $S_k$ to derive $S_2 = -m$.  
+\item Use the formula for $S_k$ to derive $S_3 = 2t$.  
+\item The \emph{girth} of a simple graph is the length of its shortest cycle.  If a graph $G$ has girth $g$, what can you say about its adjacency characteristic polynomial?
+\item Let $A$ be a real symmetric matric with eigenvalues $\lambda_1,\ldots, \lambda_n$.  Refresh yourself with the formulas of $S_0,\ldots, S_3$ and $\tr(A),\tr(A^2),\tr(A^3)$ using the eigenvalues.
+\end{enumerate}
+
+% \newpage
+% \section*{Questions to ponder}
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+
+\end{document}

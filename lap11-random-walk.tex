@@ -1,0 +1,139 @@
+\documentclass{article}
+
+%%%PACKAGE
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%% \usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage{cite}
+%% \usepackage{enumerate}
+% \usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{systeme}
+%\usepackage{siunitx}
+% \usepackage{multicol}
+% \usepackage{systeme}
+
+% for drawing graphs
+\usepackage{tikz}
+% \tikzset{every picture/.style={thick}}
+\tikzset{every node/.style={draw, circle, inner sep = 2pt}}
+\usetikzlibrary{arrows}
+
+% for margins
+\usepackage[margin=1in]{geometry}
+
+% for font
+\usepackage{euler}
+\usepackage[OT1]{eulervm}
+\renewcommand{\rmdefault}{pplx}
+
+% \setlength{\parindent}{0pt}  %no indenting
+
+% MACROS
+\newcommand{\trans}{^\top}
+\newcommand{\adj}{^{\rm adj}}
+\newcommand{\cof}{^{\rm cof}}
+\newcommand{\inp}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\dunion}{\mathbin{\dot\cup}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\be}{\mathbf{e}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+%\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Col}{\operatorname{Col}}
+\newcommand{\Row}{\operatorname{Row}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\vspan}{\operatorname{span}}
+% \newenvironment{sol}{\medskip\noindent {\bf Solution.}}{\newpage}
+\newcommand{\mystrut}{\rule[-.5\baselineskip]{0pt}{2\baselineskip}}
+% \newcommand{\mul}{\operatorname{mul}}
+\newcommand{\even}{\operatorname{even}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\iner}{\operatorname{iner}}
+\newcommand{\rL}{\mathring{L}}
+
+%%%COMMENT
+\usepackage{soul}
+\usepackage{cancel}
+\newcommand{\rbf}[1]{\textbf{\color{red}#1}}
+
+%%%THEOREM
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{question}[theorem]{Question}
+
+% for title
+\title{Random walk}
+\date{\vspace{-1cm}}
+\begin{document}
+\maketitle
+\large
+
+A \emph{Markov matrix} is an $n\times n $ matrix $M = \begin{bmatrix} m_{ij} \end{bmatrix}$ such that every entry is either positive or zero and each row sum is $1$.  In other word, each row of $M$ is a probability distribution.  One may understand a Markov matrix in the following way:  There are $n$ nodes, and each node has a certain number of population.  At each step, the population on node $i$ has $n$ choices, and the $m_{ij}$ proportion out of the population on node $i$ will switch to node $j$ in the next step.  Each Markov matrix can be visualized through its weighted digraph $\Gamma(M)$, and the population are making \emph{random walk} on this digraph according to the weights.
+
+A vector $\bx\in\mathbb{R}^n$ is called a \emph{state} if the entries are either positive or zero and sum up to $1$.  A state can be viewed as the distribution of the population on each node.  Thus, 
+\[\bx_{t+1}\trans = \bx_t\trans M,\]
+where $\bx_t$ and $\bx_{t+1}$ are the states at time $t$ and $t+1$, respectively.
+
+Here are some properties of a Markov matrix:
+\begin{itemize}
+\item $M\bone = \bone$, so $M$ has an eigenvalue $1$.  
+\item $M$ has a left eigenvector $\pi\trans$ such that $\pi\trans M = \pi\trans$.  (We call a vector with this property a \emph{stationary state} of $M$.  
+\item By the Perron--Frobenius theorem, if $\Gamma(M)$ is strongly connected, then the eigenvalue $1$ has multiplicity $1$ and the stationary state is unique.  
+\item Moreover, if $\Gamma(M)$ has period $1$, then every eigenvalue other than $1$ has magnitude smaller than $1$, so 
+\[\lim_{t\rightarrow\infty} M^t = \bone\pi\trans.\]
+\end{itemize}
+
+Let $G$ be a simple graph and $A$ its adjacency matrix.  Let $D$ be the diagonal matrix of degrees of $G$.  Then $D^{-1}A$ is a Markov matrix.  The corresponding digraph is $\Gamma(D^{-1}A) = \Gamma(A)$.  And the corresponding random walk is called the \emph{uniform random walk} on $G$.  
+
+One of the prototype algorithms for Google's search engine, known as the PageRank, utilizes the random walk on the internet digraph, where each node represents a page and each directed edge represent a link from one page targeting the other page.  More details on this topic can be found in \cite{BHSoG12}.
+
+\begin{thebibliography}{9}
+\bibitem{BHSoG12}
+A.~E. Brouwer and W.~H. Haemers.
+\newblock {\em Spectra of Graphs}.
+\newblock Springer-Verlag, New York, 2012.
+\end{thebibliography}
+
+\section*{Problems}
+\begin{enumerate}
+\setlength\itemsep{2em}
+\item Write a Markov matrix and draw its digraph.  Explain how population on node $1$ will move in the next time step.  
+\item Find a Markov matrix that has two or more different stationary states.  Find these stationary states explicitly.
+\item Find a Markov matrix such that both $1$ and $-1$ are eigenvalues of it.
+\item Prove that if every eigenvalue other than $1$ has magnitude smaller than $1$, then 
+\[\lim_{t\rightarrow\infty} M^t = \bone\pi\trans.\]
+\item Suppose $M$ is a Markov matrix such that $\Gamma(M)$ is strongly connected and with period $1$.  Design an algorithm to find $\pi$ without solving any matrix equation such as $A\bx = \bb$.   
+\item Let $G$ be a connected graph.  Describe the possible stationary state(s) of the uniform random walk.  
+% \item First passage time.
+\end{enumerate}
+
+% \newpage
+% \section*{Questions to ponder}
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+
+\end{document}

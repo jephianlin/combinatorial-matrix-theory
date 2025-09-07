@@ -1,0 +1,123 @@
+\documentclass{article}
+
+%%%PACKAGE
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%% \usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage{cite}
+%% \usepackage{enumerate}
+% \usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{systeme}
+%\usepackage{siunitx}
+% \usepackage{multicol}
+% \usepackage{systeme}
+
+% for drawing graphs
+\usepackage{tikz}
+% \tikzset{every picture/.style={thick}}
+\tikzset{every node/.style={draw, circle, inner sep = 2pt}}
+\usetikzlibrary{arrows}
+
+% for margins
+\usepackage[margin=1in]{geometry}
+
+% for font
+\usepackage{euler}
+\usepackage[OT1]{eulervm}
+\renewcommand{\rmdefault}{pplx}
+
+% \setlength{\parindent}{0pt}  %no indenting
+
+% MACROS
+\newcommand{\trans}{^\top}
+\newcommand{\adj}{^{\rm adj}}
+\newcommand{\cof}{^{\rm cof}}
+\newcommand{\inp}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\dunion}{\mathbin{\dot\cup}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\be}{\mathbf{e}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+%\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Col}{\operatorname{Col}}
+\newcommand{\Row}{\operatorname{Row}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\vspan}{\operatorname{span}}
+% \newenvironment{sol}{\medskip\noindent {\bf Solution.}}{\newpage}
+\newcommand{\mystrut}{\rule[-.5\baselineskip]{0pt}{2\baselineskip}}
+% \newcommand{\mul}{\operatorname{mul}}
+\newcommand{\even}{\operatorname{even}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\iner}{\operatorname{iner}}
+
+%%%COMMENT
+\usepackage{soul}
+\usepackage{cancel}
+\newcommand{\rbf}[1]{\textbf{\color{red}#1}}
+
+%%%THEOREM
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{question}[theorem]{Question}
+
+% for title
+\title{Effective resistance}
+\date{\vspace{-1cm}}
+\begin{document}
+\maketitle
+\large
+
+The \emph{Moore--Penrose pseudo inverse} of a symmetric matrix is the matrix $M$ that acts as the inverse of $M$ on $\Col(M)$ and has kernel $\ker(M)$, denoted by $M^\dagger$.  If $D$ is diagonal, then $D\dagger$ is obtained from $D$ by replacing each nonzero entry with each reciprocal.  For general symmetric matrix $M$ with diagonalization $M = QDQ\trans$, its pseudoinverse is $M\dagger = QD^\dagger Q\trans$.
+
+Let $G$ be a connected graph on $n$ vertices and $L$ its Laplacian matrix.  It is known that $L\bone = \bzero$ and $\rank(L) = n-1$, so $L$ is not invertible.  However, if we focus on $\bone\trans$, the space of vector orthogonal to $\bone$, then $L$ acts as an invertible function on $\bone\trans$.  Therefore, $L^\dagger$ sends a vector $\by\in\bone\trans$ to a unique vector $\bx\in\bone\trans$ and sends $\bone$ to $\bzero$.  
+
+Let $G$ be a connected graph on $n$ vertices and $L$ its Laplacian matrix.  We may view $G$ as an electric circuit where each edge represents a wire of resistance $1$.  If the current flows into vertex $i$ and out from vertex $j$ with $1$ ampere and result in the voltage loss $V$, then we say the \emph{effective resistance} from $i$ to $j$ is $V/I$.  
+
+Let $\be_1,\ldots,\be_n$ be the columns of $I_n$ and $\bv_{ij} = \be_i - \be_j$.  Then 
+\[\bu_{ij}\trans L^\dagger\bu_{ij}\]
+is the effective resistance from $i$ to $j$.  
+
+In fact, the same idea works for weighted graph, where we set the weight of the edge $\{i,j\}$ as $\frac{1}{r}$ if the resistance of the wire from $i$ to $j$ is $r$ ohm.
+
+\section*{Problems}
+\begin{enumerate}
+\setlength\itemsep{2em}
+\item Let $J_3$ be the $3\times 3$ all-ones matrix.  Find $J_3^\dagger$.   
+\item Let $L$ be the Laplacian matrix of $K_{2,2}$.  Find $L^\dagger$.
+\item Let $L$ be the Laplacian matrix of $K_4$.  Find a vector $\bx\in\bone\trans$ such that 
+\[L\bx = \begin{bmatrix} 1 \\ -1 \\ 0 \\ 0 \end{bmatrix}.\]
+\item Let $G$ be a connected graph and $L$ its Laplacian matrix.  Define a function $f:\bone\trans\rightarrow\bone\trans$ by $f(\bx) = L\bx$.  Prove that $f$ is a bijective linear function.
+\item Let $i$ and $j$ be two vertices of distance two on $C_4$.  Find the resistance distance from $i$ to $j$.
+\item Find out what is the Moore--Penrose pseudoinverse for a general matrix.  Then find the pseudoinverse of $J_{3,4}$, the $3\times 4$ all-ones matrix.
+\end{enumerate}
+
+% \newpage
+% \section*{Questions to ponder}
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+
+\end{document}

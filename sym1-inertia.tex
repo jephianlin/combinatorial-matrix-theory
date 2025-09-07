@@ -1,0 +1,124 @@
+\documentclass{article}
+
+%%%PACKAGE
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%% \usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage{cite}
+%% \usepackage{enumerate}
+% \usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{systeme}
+%\usepackage{siunitx}
+% \usepackage{multicol}
+% \usepackage{systeme}
+
+% for drawing graphs
+\usepackage{tikz}
+% \tikzset{every picture/.style={thick}}
+\tikzset{every node/.style={draw, circle, inner sep = 2pt}}
+\usetikzlibrary{arrows}
+
+% for margins
+\usepackage[margin=1in]{geometry}
+
+% for font
+\usepackage{euler}
+\usepackage[OT1]{eulervm}
+\renewcommand{\rmdefault}{pplx}
+
+% \setlength{\parindent}{0pt}  %no indenting
+
+% MACROS
+\newcommand{\trans}{^\top}
+\newcommand{\adj}{^{\rm adj}}
+\newcommand{\cof}{^{\rm cof}}
+\newcommand{\inp}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\dunion}{\mathbin{\dot\cup}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+%\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Col}{\operatorname{Col}}
+\newcommand{\Row}{\operatorname{Row}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\vspan}{\operatorname{span}}
+% \newenvironment{sol}{\medskip\noindent {\bf Solution.}}{\newpage}
+\newcommand{\mystrut}{\rule[-.5\baselineskip]{0pt}{2\baselineskip}}
+% \newcommand{\mul}{\operatorname{mul}}
+\newcommand{\even}{\operatorname{even}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\iner}{\operatorname{iner}}
+
+%%%COMMENT
+\usepackage{soul}
+\usepackage{cancel}
+\newcommand{\rbf}[1]{\textbf{\color{red}#1}}
+
+%%%THEOREM
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{question}[theorem]{Question}
+
+% for title
+\title{Inertia and congruence}
+\date{\vspace{-1cm}}
+\begin{document}
+\maketitle
+\large
+
+From now on, we will focus on real symmetric matrices.  (Most of the theorems also apply to complex Hermitian matrices.)
+
+Let $A = \begin{bmatrix} a_{ij} \end{bmatrix}$ be an $n\times n$ real symmetric matrix.  By the \textbf{spectral theorem}, $A$ is diagonalizable through an \textbf{orthonormal} eigenbasis $\{\bu_1,\ldots,\bu_n\}$ and the corresponding eigenvalues $\{\lambda_1,\ldots,\lambda_n\}$ are \textbf{real} numbers.  Since the eigenvalues are real, we may assume $\lambda_1\leq \cdots \leq \lambda_n$.  
+
+The \emph{inertia} of $A$ is a tuple 
+\[\iner(A) = (n_+(A), n_-(A), n_0(A)),\]
+where $n_+(A)$, $n_-(A)$, and $n_0(A)$ are the number of positive, negative, and zero eigenvalues of $A$.  
+
+Two real symmetric matrices $A$ and $B$ are \emph{congruent} if there is an \textbf{invertible} matrix $Q$ such that $B = Q\trans AQ$.  According to \textbf{Sylvester's law of inertia}, two congruent matrices have the same inertia.
+
+Recall that every invertible matrix can be decomposed into the product of a sequence of elementary matrices, which correspond to a sequence of row operations.  Therefore, $A$ and $B$ are congruent if and only if $B$ can be obtained from $A$ by a sequence of symmetric row/column operations.  Indeed, every real symmetric matrix is congruent to the following canonical form 
+\[\begin{bmatrix}
+ I_p & & \\
+  & -I_q & \\
+  & & O_r 
+\end{bmatrix},\]
+where $p = n_+(A)$, $q = n_-(A)$, and $r = n_0(A)$.  
+
+\section*{Problems}
+\begin{enumerate}
+\setlength\itemsep{2em}
+\item Write a $3\times 3$ real symmetric matrix.  Diagonalize it, and find its inertia.
+\item Use the same matrix you had, and apply symmetric row/column operations to find its inertia.
+\item Let $J_n$ be the $n\times n$ all-ones matrix.  Find its inertia.  Find an invertible matrix through which $J_n$ is congruent to its canonical form.
+\end{enumerate}
+
+% \newpage
+% \section*{Questions to ponder}
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+
+\end{document}

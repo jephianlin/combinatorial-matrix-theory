@@ -1,0 +1,134 @@
+\documentclass{article}
+
+%%%PACKAGE
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%% \usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage{cite}
+%% \usepackage{enumerate}
+% \usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{systeme}
+%\usepackage{siunitx}
+% \usepackage{multicol}
+% \usepackage{systeme}
+
+% for drawing graphs
+\usepackage{tikz}
+% \tikzset{every picture/.style={thick}}
+\tikzset{every node/.style={draw, circle, inner sep = 2pt}}
+\usetikzlibrary{arrows}
+
+% for margins
+\usepackage[margin=1in]{geometry}
+
+% for font
+\usepackage{euler}
+\usepackage[OT1]{eulervm}
+\renewcommand{\rmdefault}{pplx}
+
+% \setlength{\parindent}{0pt}  %no indenting
+
+% MACROS
+\newcommand{\trans}{^\top}
+\newcommand{\adj}{^{\rm adj}}
+\newcommand{\cof}{^{\rm cof}}
+\newcommand{\inp}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\dunion}{\mathbin{\dot\cup}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+%\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Col}{\operatorname{Col}}
+\newcommand{\Row}{\operatorname{Row}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\vspan}{\operatorname{span}}
+% \newenvironment{sol}{\medskip\noindent {\bf Solution.}}{\newpage}
+\newcommand{\mystrut}{\rule[-.5\baselineskip]{0pt}{2\baselineskip}}
+% \newcommand{\mul}{\operatorname{mul}}
+\newcommand{\even}{\operatorname{even}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\iner}{\operatorname{iner}}
+
+%%%COMMENT
+\usepackage{soul}
+\usepackage{cancel}
+\newcommand{\rbf}[1]{\textbf{\color{red}#1}}
+
+%%%THEOREM
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{question}[theorem]{Question}
+
+% for title
+\title{Perron--Frobenius theorem}
+\date{\vspace{-1cm}}
+\begin{document}
+\maketitle
+\large
+
+Let $A$ be an $n\times n$ real (not necessarily symmetric) matrix.  We say $A > 0$ if every entry of $A$ is positive, while $A\geq 0$ is similarly defined.  
+
+If there is a permutation matrix $P$ such that 
+\[PAP\trans = \begin{bmatrix}
+ B & C \\
+ O & D
+\end{bmatrix}\]
+for some nontrivial square matrices $B$ and $D$, then $A$ is said to be \emph{reducible}.  Otherwise, $A$ is called \emph{irreducible}.  Let $\Gamma$ be the digraph of $A$.  Then $A$ is irreducible if and only if $\Gamma$ is strongly connected.  On the other hand, the \emph{period} of $A$ is the greatest common divisor of the length of all closed walk on $\Gamma$.  
+
+Let $A$ be an $n\times n$ irreducible matrix such that $A\geq 0$.  
+The \textbf{Perron--Frobenius theorem} states (at least) the following:
+\begin{enumerate}
+\item There is an eigenvalue $\rho$ of $A$ that is real and $|\lambda|\leq\rho$ for any eigenvalue of $A$.
+\item The algebraic and geometric multiplicity of $\rho$ is $1$.  Moreover, there is an eigenvector of $A$ with respect to $\rho$ that is entrywisely positive.
+\item If $\bu$ is an eigenvector of $A$ that is 
+entrywisely positive, then $\bu$ is an eigenvector with respect to $\rho$.
+\item If $A$ has period $k$, then there are exactly $k$ eigenvalues $\lambda$ of $A$ with $|\lambda| = \rho$.  
+\end{enumerate}
+
+Let $G$ be a graph and $A$ its adjacency matrix.  Then the \emph{spectral radius} of $G$ is the largest eigenvalue of $A$, denoted by $\rho(G)$.
+
+\section*{Problems}
+\begin{enumerate}
+\setlength\itemsep{2em}
+\item Draw a digraph that is strongly connected.  Draw a digraph that is weakly connected but not strongly connected.
+\item Find a matrix $A \geq 0$ that is reducible.  Find a matrix $A \geq 0$ that is irreducible.
+\item If $A$ is the adjacency matrix of $G$, how can we determine if $A$ is irreducible or not by $G$?
+\item If $A$ is the adjacency matrix of $G$, what are the possible periods of $A$? 
+\item For each of the following condition, pick a graph $G$ and calculate its spectral radius and the corresponding eigenvector.  Here $A$ is the adjacency matrix of $G$.
+\begin{enumerate}
+\item The matrix $A$ is irreducible and has period $1$.
+\item The matrix $A$ is irreducible and has period $2$.
+\item The matrix $A$ is not irreducible.
+\end{enumerate}
+\end{enumerate}
+
+% \newpage
+% \section*{Questions to ponder}
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+
+\end{document}

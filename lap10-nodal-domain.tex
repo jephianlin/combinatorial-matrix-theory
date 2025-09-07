@@ -1,0 +1,136 @@
+\documentclass{article}
+
+%%%PACKAGE
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%% \usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage{cite}
+%% \usepackage{enumerate}
+% \usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{systeme}
+%\usepackage{siunitx}
+% \usepackage{multicol}
+% \usepackage{systeme}
+
+% for drawing graphs
+\usepackage{tikz}
+% \tikzset{every picture/.style={thick}}
+\tikzset{every node/.style={draw, circle, inner sep = 2pt}}
+\usetikzlibrary{arrows}
+
+% for margins
+\usepackage[margin=1in]{geometry}
+
+% for font
+\usepackage{euler}
+\usepackage[OT1]{eulervm}
+\renewcommand{\rmdefault}{pplx}
+
+% \setlength{\parindent}{0pt}  %no indenting
+
+% MACROS
+\newcommand{\trans}{^\top}
+\newcommand{\adj}{^{\rm adj}}
+\newcommand{\cof}{^{\rm cof}}
+\newcommand{\inp}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\dunion}{\mathbin{\dot\cup}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\be}{\mathbf{e}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+%\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Col}{\operatorname{Col}}
+\newcommand{\Row}{\operatorname{Row}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\vspan}{\operatorname{span}}
+% \newenvironment{sol}{\medskip\noindent {\bf Solution.}}{\newpage}
+\newcommand{\mystrut}{\rule[-.5\baselineskip]{0pt}{2\baselineskip}}
+% \newcommand{\mul}{\operatorname{mul}}
+\newcommand{\even}{\operatorname{even}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\iner}{\operatorname{iner}}
+\newcommand{\rL}{\mathring{L}}
+
+%%%COMMENT
+\usepackage{soul}
+\usepackage{cancel}
+\newcommand{\rbf}[1]{\textbf{\color{red}#1}}
+
+%%%THEOREM
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{question}[theorem]{Question}
+
+% for title
+\title{Nodal domain}
+\date{\vspace{-1cm}}
+\begin{document}
+\maketitle
+\large
+
+The use of a Fiedler vector is not limited to trees.  
+
+Let $G$ be a connected graph and $\bv = (v_1,\ldots,v_n)$ a Fiedler vector of $G$.  Again, we let 
+\[\begin{aligned}
+N_+(\bv) &= \{i \in V(G): v_i > 0\}, \\ 
+N_-(\bv) &= \{i \in V(G): v_i < 0\}, \\
+N_0(\bv) &= \{i \in V(G): v_i = 0\}.
+\end{aligned}\]
+It is known that $G[N_+(\bv)\dunion N_0(\bv)]$ and $G[N_-(\bv)\dunion N_0(\bv)]$ are connected.  Moreover, if the algebraic connectivity has multiplicity $1$, then $G[N_+(\bv)]$ and $G[N_-(\bv)]$ are also connected.
+
+In general, let $G$ be a graph on $n$ vertices and $\bv\in\mathbb{R}^n$.  We may define $N_+(\bv)$, $N_-(\bv)$, and $N_0(\bv)$ as above.  A \emph{positive (negative) strong nodal domain} is a component of the induced subgraph $G[N_+(\bv)]$ ($G[N_-(\bv)]$).  A \emph{positive (negative) weak nodal domain} is a component of the induced subgraph $G[N_+(\bv)\dunion N_0(\bv)]$ ($G[N_-(\bv)\dunion N_0(\bv)]$).  
+We may define $\mathfrak{S}(\bv)$ as the number of strong nodal domains of $\bv$ and $\mathfrak{W}(\bv)$ as the number of weak nodal domains of $\bv$.  
+
+Let $G$ be a connected graph on $n$ vertices, $\lambda_1 \leq \cdots \leq \lambda_n$ its Laplacian eigenvalues, and $\bv_1,\ldots,\bv_n$ the corresponding eigenvectors.  By the Perron--Frobenius theorem, $\bv_1$ is either all positive or all negative, so $\mathfrak{S}(\bv_1) = \mathfrak{W}(\bv_1) = 1$.  From above, we know $\mathfrak{W}(\bv_2) = 2$, and, provided that the multiplicity of $\lambda_2$ is one, $\mathfrak{S}(\bv_2) = 2$.  This behavior can be extended.  The \textbf{discrete nodal domain theorem} states that 
+\[\mathfrak{W}(\bv_k) \leq k \text{ and } \mathfrak{S}(\bv_k) \leq k + m - 1,\]
+where $m$ is the multiplicity of $\lambda_k$.
+
+More details on this topic can be found in \cite{BLS07}.
+
+\begin{thebibliography}{9}
+\bibitem{BLS07}
+T.~Biyiko{\u g}u, J.~Leydold, and P.~F. Stadler.
+\newblock {\em Laplacian {E}igenvectors of {G}raphs: {P}erron--{F}robenius and
+  {F}aber--{K}rahn Type Theorems}.
+\newblock Springer-Verlag Berlin Heidelberg, 2007.
+\end{thebibliography}
+
+\section*{Problems}
+\begin{enumerate}
+\setlength\itemsep{2em}
+\item Pick a $\bv_2$ for $C_4$ and draw the strong and weak nodal domains of $G$ for $k = 2$.
+\item Find a graph and a $k$ such that $\mathfrak{S}(\bv_k) > k$.  
+\item Use software if necessary, pick a graph on $10$ or more vertices and then illustrate its nodal domains for some $k$.
+\item Prove the discrete nodal domain theorem.  
+\end{enumerate}
+
+% \newpage
+% \section*{Questions to ponder}
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+
+\end{document}

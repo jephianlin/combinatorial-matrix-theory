@@ -1,0 +1,134 @@
+\documentclass{article}
+
+%%%PACKAGE
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%% \usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage{cite}
+%% \usepackage{enumerate}
+% \usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{systeme}
+%\usepackage{siunitx}
+% \usepackage{multicol}
+% \usepackage{systeme}
+
+% for drawing graphs
+\usepackage{tikz}
+% \tikzset{every picture/.style={thick}}
+\tikzset{every node/.style={draw, circle, inner sep = 2pt}}
+\usetikzlibrary{arrows}
+
+% for margins
+\usepackage[margin=1in]{geometry}
+
+% for font
+\usepackage{euler}
+\usepackage[OT1]{eulervm}
+\renewcommand{\rmdefault}{pplx}
+
+% \setlength{\parindent}{0pt}  %no indenting
+
+% MACROS
+\newcommand{\trans}{^\top}
+\newcommand{\adj}{^{\rm adj}}
+\newcommand{\cof}{^{\rm cof}}
+\newcommand{\inp}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\dunion}{\mathbin{\dot\cup}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+%\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Col}{\operatorname{Col}}
+\newcommand{\Row}{\operatorname{Row}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\vspan}{\operatorname{span}}
+% \newenvironment{sol}{\medskip\noindent {\bf Solution.}}{\newpage}
+\newcommand{\mystrut}{\rule[-.5\baselineskip]{0pt}{2\baselineskip}}
+% \newcommand{\mul}{\operatorname{mul}}
+\newcommand{\even}{\operatorname{even}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\iner}{\operatorname{iner}}
+
+%%%COMMENT
+\usepackage{soul}
+\usepackage{cancel}
+\newcommand{\rbf}[1]{\textbf{\color{red}#1}}
+
+%%%THEOREM
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{question}[theorem]{Question}
+
+% for title
+\title{Quadratic form}
+\date{\vspace{-1cm}}
+\begin{document}
+\maketitle
+\large
+
+Let $G$ be a simple graph on $n$ vertices.  The \emph{Laplacian matrix} of $G$ is a matrix $L(G) = \begin{bmatrix} \ell_{ij} \end{bmatrix}$ such that 
+\[\ell_{ij} = \begin{cases}
+\deg_G(i) & \text{if }i = j, \\
+-1 & \text{if }\{i,j\}\in E(G), \\
+0 & otherwise.
+\end{cases}\]
+Since the row sums of $L(G)$ are zero, $L(G)\bone = \bzero$ for any $G$.  
+
+Observe that the Laplacian matrix of $K_2$ is 
+\[\begin{bmatrix} 
+ 1 & -1 \\
+ -1 & 1 
+\end{bmatrix},\]
+and its quadratic form is 
+\[\begin{bmatrix} x_1 & x_2 \end{bmatrix} 
+\begin{bmatrix} 
+ 1 & -1 \\
+ -1 & 1 
+\end{bmatrix}
+\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = x_1^2 - 2x_1x_2 + x_2^2 = (x_1 - x_2)^2.\]
+In fact, if $\bx = (x_1,\ldots,x_n)\trans$ and $L = L(G)$, then 
+\[\bx\trans L\bx = \sum_{\{i,j\}\in E(G)}(x_i - x_j)^2.\]
+Therefore, $L(G)$ is a positive semidefinite matrix for any $G$ and $L\bx = \bzero$ if and only if $\bx\trans L\bx = 0$.
+
+Another way to see this is through the incidence matrix.  Let $G$ be a graph on vertex set $\{v_1,\ldots,v_n\}$ and edge set $\{e_1,\ldots,e_m\}$.  An \emph{incidence matrix} of $G$ is an $n\times m$ matrix $N(G)$ whose $j$-th column is a the vector in $\mathbb{R}^n$ with $1$ and $-1$ on the entry corresponding to the two endpoints of $e_j$.  Thus, $L(G) = N(G)N(G)\trans$.
+
+\section*{Problems}
+\begin{enumerate}
+\setlength\itemsep{2em}
+\item Pick a graph and find its Laplacian matrix and one of its incidence matrix.
+\item Pick a graph on $3$ vertices and check if the quadratic form of its Laplacian matrix follows the formula.
+\item Pick a connected graph $G$ on $4$ vertices and let $L$ be its Laplacian matrix.  If $\bx$ is an eigenvector of $L$ with respect to $0$, what is $\bx$?
+\item If $G$ and $H$ are two graphs such that $V(G) = V(H)$ and $E(G) \cap E(H) = \emptyset$, show that $L(G + H) = L(G) + L(H)$, where $G + H$ is the graph with vertex set $V(G)$ and edge set $E(G) \cup E(H)$.
+\item Let $G$ be a graph and $L$ its Laplacian matrix.  For each edge $e\in E(G)$, define $H$ with $V(H_e) = V(G)$ and $E(H_e) = \{e\}$.  Thus, $G = \sum_{e\in E(G)} H_e$.  Use this fact to prove the formula of the quadratic form.
+\end{enumerate}
+
+% \newpage
+% \section*{Questions to ponder}
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+
+\end{document}

@@ -1,0 +1,122 @@
+\documentclass{article}
+
+%%%PACKAGE
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%% \usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage{cite}
+%% \usepackage{enumerate}
+% \usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{systeme}
+%\usepackage{siunitx}
+% \usepackage{multicol}
+% \usepackage{systeme}
+
+% for drawing graphs
+\usepackage{tikz}
+% \tikzset{every picture/.style={thick}}
+\tikzset{every node/.style={draw, circle, inner sep = 2pt}}
+\usetikzlibrary{arrows}
+
+% for margins
+\usepackage[margin=1in]{geometry}
+
+% for font
+\usepackage{euler}
+\usepackage[OT1]{eulervm}
+\renewcommand{\rmdefault}{pplx}
+
+% \setlength{\parindent}{0pt}  %no indenting
+
+% MACROS
+\newcommand{\trans}{^\top}
+\newcommand{\adj}{^{\rm adj}}
+\newcommand{\cof}{^{\rm cof}}
+\newcommand{\inp}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\dunion}{\mathbin{\dot\cup}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\be}{\mathbf{e}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+%\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Col}{\operatorname{Col}}
+\newcommand{\Row}{\operatorname{Row}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\vspan}{\operatorname{span}}
+% \newenvironment{sol}{\medskip\noindent {\bf Solution.}}{\newpage}
+\newcommand{\mystrut}{\rule[-.5\baselineskip]{0pt}{2\baselineskip}}
+% \newcommand{\mul}{\operatorname{mul}}
+\newcommand{\even}{\operatorname{even}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\iner}{\operatorname{iner}}
+
+%%%COMMENT
+\usepackage{soul}
+\usepackage{cancel}
+\newcommand{\rbf}[1]{\textbf{\color{red}#1}}
+
+%%%THEOREM
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{question}[theorem]{Question}
+
+% for title
+\title{Algebraic connectivity}
+\date{\vspace{-1cm}}
+\begin{document}
+\maketitle
+\large
+
+Let $G$ be a simple graph.  The \emph{connectivity} of $G$ is the minimum number of vertices required such that by removing them the remaining graph is disconnected, $\kappa(G)$.  We vacuously define $\kappa(K_n) = n-1$.  
+
+Let $G$ be a simple graph on $n$ vertices and $L$ its Laplacian matrix.  Let $\lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_n$ be the eigenvalues of $L$.  Recall that $\lambda_1 = 0$, and the multiplicity of $0$ is the number of components of $G$.  Equivalently, $\lambda_2 \neq 0$ if and only if $G$ is connected.  Moreover, it is known that $\lambda_2 \leq \kappa(G)$.  Therefore, we usually refer $\lambda_2$ as the \emph{algebraic connectivity} of $G$, denoted by $\lambda_2(G)$.  
+
+The sketch of the proof of $\lambda_2(G) \leq \kappa(G)$ is as follows:
+\begin{enumerate}
+\item Let $S$ be a set such that $G\setminus S$ is disconnected and $|S| = \kappa(G)$.  Say $V(G\setminus S)$ can be partitioned into $X_1\dunion X_2$ such that there is no edge between them.  Let $n_1 = |X_1|$ and $n_2 = |X_2|$.  
+\item If $e$ is not an edge of $G$, then $\lambda_2(G) \leq \lambda_2(G+e)$. (why?) Thus, we consider a new graph $H$ obtained from $G$ by adding all possible edges between $S$ and $V(G\setminus S)$.  Thus, 
+\[\lambda_2(G) \leq \lambda_2(H).\]
+\item Pick a vector $\bu$ in $\mathbb{R}^n$ that is $0$ on $S$, $n_2$ on $X_1$, and $-n_1$ on $X_2$.  Thus, $L(H)\bu = |S|\bu$, so $\lambda_2(H) \leq |S| = \kappa(G)$.  
+\end{enumerate}
+
+\section*{Problems}
+\begin{enumerate}
+\setlength\itemsep{2em}
+\item Let $T$ be a tree.  What is $\kappa(T)$?    
+\item What is the $\lambda_2(K_n)$?  
+\item Pick a connected graph $G$.  Find $\lambda_2(G)$ and $\kappa(G)$. 
+\item Prove $\lambda_2(G) \leq \lambda_2(G + e)$.  [Hint: Use Rayleigh quotient.]
+\item Explain why $L(H)\bu = |S|\bu$.  
+\item Use software if necessary, find a graph $G$ with $\kappa(G) - \lambda_2(G) \geq 1$.  
+\end{enumerate}
+
+% \newpage
+% \section*{Questions to ponder}
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+
+\end{document}

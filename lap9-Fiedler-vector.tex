@@ -1,0 +1,130 @@
+\documentclass{article}
+
+%%%PACKAGE
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%% \usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage{cite}
+%% \usepackage{enumerate}
+% \usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{systeme}
+%\usepackage{siunitx}
+% \usepackage{multicol}
+% \usepackage{systeme}
+
+% for drawing graphs
+\usepackage{tikz}
+% \tikzset{every picture/.style={thick}}
+\tikzset{every node/.style={draw, circle, inner sep = 2pt}}
+\usetikzlibrary{arrows}
+
+% for margins
+\usepackage[margin=1in]{geometry}
+
+% for font
+\usepackage{euler}
+\usepackage[OT1]{eulervm}
+\renewcommand{\rmdefault}{pplx}
+
+% \setlength{\parindent}{0pt}  %no indenting
+
+% MACROS
+\newcommand{\trans}{^\top}
+\newcommand{\adj}{^{\rm adj}}
+\newcommand{\cof}{^{\rm cof}}
+\newcommand{\inp}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\dunion}{\mathbin{\dot\cup}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\be}{\mathbf{e}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+%\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Col}{\operatorname{Col}}
+\newcommand{\Row}{\operatorname{Row}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\vspan}{\operatorname{span}}
+% \newenvironment{sol}{\medskip\noindent {\bf Solution.}}{\newpage}
+\newcommand{\mystrut}{\rule[-.5\baselineskip]{0pt}{2\baselineskip}}
+% \newcommand{\mul}{\operatorname{mul}}
+\newcommand{\even}{\operatorname{even}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\iner}{\operatorname{iner}}
+\newcommand{\rL}{\mathring{L}}
+
+%%%COMMENT
+\usepackage{soul}
+\usepackage{cancel}
+\newcommand{\rbf}[1]{\textbf{\color{red}#1}}
+
+%%%THEOREM
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{question}[theorem]{Question}
+
+% for title
+\title{Fiedler vector}
+\date{\vspace{-1cm}}
+\begin{document}
+\maketitle
+\large
+
+We have seen that the eigenvector corresponding to the second smallest Laplacian eigenvalue $\lambda_2$ (algebraic connectivity) is powerful on partitioning a graph.  This vector is called the \emph{Fiedler vector}, naming after the Czech mathematician Miroslav Fiedler.  
+
+Let $T$ be a tree and $\bv = (v_1,\ldots,v_n)$ a Fiedler vector of $T$.  Then it is known that either one of the two cases will happen:
+\begin{itemize}
+\item There is a unique vertex $i$ such that $v_i = 0$ and it is adjacent to a vertex $j$ with $v_j \neq 0$.  
+\item There is a unique pair of adjacenct vertices $i$ and $j$ such that $v_iv_j<0$.  
+\end{itemize}
+In fact, the set $\{i\}$ or $\{i,j\}$ coincide with the characteristic set found by the bottleneck matrices!
+
+Moreover, the values on $\bv$ is monotone.  That is, for any path going from a vertex in the characteristic set to a leaf (without touching another vertex in the characteristic set), then the values of $\bv$ on this path is either monotone decreasing or monotone increasing.
+
+More details on this topic can be found in \cite{BapatGM14}.
+
+\begin{thebibliography}{9}
+\bibitem{BapatGM14}
+R.~B. Bapat.
+\newblock {\em Graphs and Matrices}.
+\newblock Springer-Verlag, London, 2nd edition, 2014.
+\end{thebibliography}
+
+
+\section*{Problems}
+\begin{enumerate}
+\setlength\itemsep{2em}
+\item Let $T = P_4$.  Find a Fiedler vector.  (Essentially there is only one choice.)  Then use it to find the characteristic set.
+\item Let $T = K_{1,3}$.  Find a Fiedler vector.  (There are many choices.)  Then use it to find the characteristic set.  Try a different Fiedler vector that is not parallel to the first one and see if the characteristic set is the same.
+\item Prove that exactly one of the two cases mentioned above will happen.
+\item Prove the monotonicity.  
+\end{enumerate}
+
+% \newpage
+% \section*{Questions to ponder}
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+
+\end{document}

@@ -1,0 +1,126 @@
+\documentclass{article}
+
+%%%PACKAGE
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%% \usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage{cite}
+%% \usepackage{enumerate}
+% \usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{systeme}
+%\usepackage{siunitx}
+% \usepackage{multicol}
+% \usepackage{systeme}
+
+% for drawing graphs
+\usepackage{tikz}
+% \tikzset{every picture/.style={thick}}
+\tikzset{every node/.style={draw, circle, inner sep = 2pt}}
+\usetikzlibrary{arrows}
+
+% for margins
+\usepackage[margin=1in]{geometry}
+
+% for font
+\usepackage{euler}
+\usepackage[OT1]{eulervm}
+\renewcommand{\rmdefault}{pplx}
+
+% \setlength{\parindent}{0pt}  %no indenting
+
+% MACROS
+\newcommand{\trans}{^\top}
+\newcommand{\adj}{^{\rm adj}}
+\newcommand{\cof}{^{\rm cof}}
+\newcommand{\inp}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\dunion}{\mathbin{\dot\cup}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+%\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Col}{\operatorname{Col}}
+\newcommand{\Row}{\operatorname{Row}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\vspan}{\operatorname{span}}
+% \newenvironment{sol}{\medskip\noindent {\bf Solution.}}{\newpage}
+\newcommand{\mystrut}{\rule[-.5\baselineskip]{0pt}{2\baselineskip}}
+% \newcommand{\mul}{\operatorname{mul}}
+\newcommand{\even}{\operatorname{even}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\iner}{\operatorname{iner}}
+
+%%%COMMENT
+\usepackage{soul}
+\usepackage{cancel}
+\newcommand{\rbf}[1]{\textbf{\color{red}#1}}
+
+%%%THEOREM
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{question}[theorem]{Question}
+
+% for title
+\title{Matching number of a tree}
+\date{\vspace{-1cm}}
+\begin{document}
+\maketitle
+\large
+
+Let $T$ be a tree.  If $v$ is a leaf of $T$, then $v$ has a unique neighbor $u$ and 
+\[\begin{aligned}
+\rank(A(T)) &= 2 + \rank(A(T - v - u)), \\
+\det(A(T)) &= -1\cdot\det(A(T - v - u)).
+\end{aligned}\]
+
+A \emph{matching} on a graph $G$ is a set of edges in $G$ such that they mutually do not share any endpoints.  The \emph{matching number} of $G$ is the cardinality of the largest matching on $G$, denoted by $\alpha'(G)$.  If a matching covers every vertex of $G$, then it is called a \emph{perfect matching}.  Therefore, $G$ has a perfect matching if and only if $|V(G)| = 2\alpha'(G)$.
+
+Consequently, when $T$ is a tree and $A$ is its adjacency matrix, 
+\[\rank(A) = 2\alpha'(T)\]
+and
+\[\det(A) = \begin{cases}
+(-1)^{\alpha'(T)} & \text{if $T$ has a perfect matching}, \\
+0 & \text{otherwise}.
+\end{cases}\]
+
+\section*{Problems}
+For the following problems, $G$ is a graph on the vertex set $[n]$ and $A$ is its adjacency matrix.
+\begin{enumerate}
+\setlength\itemsep{2em}
+\item Draw a tree with perfect matching and a tree without perfect matching.  Find the ranks and determinants of their adjacency matrices.
+\item Find a graph $G$ such that $\rank(A(G)) \neq 2\alpha'(G)$.
+\item Find a graph $G$ without perfect matching such that $\det(A(G)) \neq 0$.
+\item Let $T$, $v$, $u$ be as described above.  Prove 
+\[\rank(A(T)) = 2 + \rank(A(T - v - u)).\]
+\item Let $T$ be a tree and $A$ its adjacency matrix.  Described the inertia of $A$ in terms of $\alpha'(T)$.
+\end{enumerate}
+
+% \newpage
+% \section*{Questions to ponder}
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+
+\end{document}

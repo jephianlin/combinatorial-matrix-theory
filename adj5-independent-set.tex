@@ -1,0 +1,116 @@
+\documentclass{article}
+
+%%%PACKAGE
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%% \usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage{cite}
+%% \usepackage{enumerate}
+% \usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{systeme}
+%\usepackage{siunitx}
+% \usepackage{multicol}
+% \usepackage{systeme}
+
+% for drawing graphs
+\usepackage{tikz}
+% \tikzset{every picture/.style={thick}}
+\tikzset{every node/.style={draw, circle, inner sep = 2pt}}
+\usetikzlibrary{arrows}
+
+% for margins
+\usepackage[margin=1in]{geometry}
+
+% for font
+\usepackage{euler}
+\usepackage[OT1]{eulervm}
+\renewcommand{\rmdefault}{pplx}
+
+% \setlength{\parindent}{0pt}  %no indenting
+
+% MACROS
+\newcommand{\trans}{^\top}
+\newcommand{\adj}{^{\rm adj}}
+\newcommand{\cof}{^{\rm cof}}
+\newcommand{\inp}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\dunion}{\mathbin{\dot\cup}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+%\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Col}{\operatorname{Col}}
+\newcommand{\Row}{\operatorname{Row}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\vspan}{\operatorname{span}}
+% \newenvironment{sol}{\medskip\noindent {\bf Solution.}}{\newpage}
+\newcommand{\mystrut}{\rule[-.5\baselineskip]{0pt}{2\baselineskip}}
+% \newcommand{\mul}{\operatorname{mul}}
+\newcommand{\even}{\operatorname{even}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\iner}{\operatorname{iner}}
+
+%%%COMMENT
+\usepackage{soul}
+\usepackage{cancel}
+\newcommand{\rbf}[1]{\textbf{\color{red}#1}}
+
+%%%THEOREM
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{question}[theorem]{Question}
+
+% for title
+\title{Independent set}
+\date{\vspace{-1cm}}
+\begin{document}
+\maketitle
+\large
+
+Let $G$ be a graph on $n$ vertices and $A$ its adjacency matrix.  An \emph{independent set} of $G$ is a set $S$ of vertices such that the induced subgraph $G[S]$ contains no edge.  Equivalently, $S\subseteq[n]$ is an independent set of $G$ if and only if $A[S] = O$.  The \emph{independence number} of $G$ is the cardinality of the largest independent set of $G$, denoted by $\alpha(G)$.  
+
+Let $G$ be a graph on $n$ vertices, $A$ its adjacency matrix, and $\lambda_1\leq \cdots \leq \lambda_n$ the eigenvalues of $A$.  Let $k = \alpha(G)$.  Then $A$ contains a $k\times k$ principal submatrix that is a zero matrix, so its eigenvalues are 
+\[\mu_1 = \cdots = \mu_k = 0.\]
+By the interlacing property, we know 
+\[\lambda_k \leq 0 \text{ and } \lambda_{n - (k-1)} \geq 0.\]
+Equivalently, $n_-(A) + n_0(A) \geq k$ and $n_+(A) + n_0(A) \geq k$.  Therefore, 
+\[\alpha(G) \leq \min\{n_-(A) + n_0(A), n_+(A) + n_0(A)\}.\]
+This bound is called \textbf{Cvetkovi\'c's inertia bound}.
+
+\section*{Problems}
+\begin{enumerate}
+\setlength\itemsep{2em}
+\item Pick a graph, calculate its independence number and its inertia, and then check if Cvetkovi\'c's inertia bound is tight.   
+\item Find two graphs such that the inertia bound is tight for one graph but is not tight for the other.  
+\item Suppose $G$ has an induced subgraph that is isomorphic to $K_{m,n}$ with $k = m + n$.  Prove that $k - 1 \leq n_-(A) + n_0(A)$, where $A$ is the adjacency matrix of $G$.
+\end{enumerate}
+
+% \newpage
+% \section*{Questions to ponder}
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+
+\end{document}

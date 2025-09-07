@@ -1,0 +1,125 @@
+\documentclass{article}
+
+%%%PACKAGE
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%% \usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage{cite}
+%% \usepackage{enumerate}
+% \usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{systeme}
+%\usepackage{siunitx}
+% \usepackage{multicol}
+% \usepackage{systeme}
+
+% for drawing graphs
+\usepackage{tikz}
+% \tikzset{every picture/.style={thick}}
+\tikzset{every node/.style={draw, circle, inner sep = 2pt}}
+\usetikzlibrary{arrows}
+
+% for margins
+\usepackage[margin=1in]{geometry}
+
+% for font
+\usepackage{euler}
+\usepackage[OT1]{eulervm}
+\renewcommand{\rmdefault}{pplx}
+
+% \setlength{\parindent}{0pt}  %no indenting
+
+% MACROS
+\newcommand{\trans}{^\top}
+\newcommand{\adj}{^{\rm adj}}
+\newcommand{\cof}{^{\rm cof}}
+\newcommand{\inp}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\dunion}{\mathbin{\dot\cup}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+%\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Col}{\operatorname{Col}}
+\newcommand{\Row}{\operatorname{Row}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\vspan}{\operatorname{span}}
+% \newenvironment{sol}{\medskip\noindent {\bf Solution.}}{\newpage}
+\newcommand{\mystrut}{\rule[-.5\baselineskip]{0pt}{2\baselineskip}}
+% \newcommand{\mul}{\operatorname{mul}}
+\newcommand{\even}{\operatorname{even}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\iner}{\operatorname{iner}}
+
+%%%COMMENT
+\usepackage{soul}
+\usepackage{cancel}
+\newcommand{\rbf}[1]{\textbf{\color{red}#1}}
+
+%%%THEOREM
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{question}[theorem]{Question}
+
+% for title
+\title{Matrix-tree theorem}
+\date{\vspace{-1cm}}
+\begin{document}
+\maketitle
+\large
+
+Let $G$ be a connected graph on $n$ vertices.  A \emph{spanning tree} of $G$ is a spanning subgraph $T$ of $G$ such that $T$ is a tree.  Let $L$ be the Laplacian matrix of $G$ and $L(1)$ the principal submatrix obtained from $L$ by removing the first row and column.  Then the \textbf{matrix-tree theorem} states that 
+\[\det(L(1)) = \text{the number of spanning trees of $G$}.\]
+
+One way to prove the matrix-tree theorem utilizes the \textbf{Cauchy--Binet formula}:  Let $A$ be an $n\times m$ matrix and $B$ an $m\times n$ matrix.  Then 
+\[\det(AB) = \sum_{\substack{\alpha\subseteq[m]\\|\alpha| = n}}\det(A[:,\alpha])\det(B[\alpha,:]),\]
+where $A[:,\alpha]$ is the submatrix of $A$ induced on the columns in $\alpha$ while $B[\alpha,:]$ is the submatrix of $B$ induced on the rows in $\alpha$.  
+
+Let $G$ be a graph on $n$ vertices and $m$ edges.  Let $N$ be an incidence matrix of $G$ and $N'$ the $(n-1)\times m$ matrix obtained from $N$ by removing the first row.  Thus, for any $\alpha\subseteq E(G)$ with $|\alpha| = n-1$, we have 
+\begin{enumerate}
+\item $L(1) = N'N'{}\trans$, 
+\item $\det(N'[:,\alpha]) = \pm 1$ if $\alpha$ induces a spanning tree, and 
+\item $\det(N'[:,\alpha]) = 0$ if $\alpha$ contains a cycle.
+\end{enumerate}
+Consequently, 
+\[\det(L(1)) = \sum_{\substack{\alpha\subseteq E(G)\\|\alpha| = n-1}}\det(N'[:,\alpha])\det(N'[\alpha,:])\]
+counts exactly the number of spanning trees.
+
+\section*{Problems}
+\begin{enumerate}
+\setlength\itemsep{2em}
+\item Pick a $2\times 3$ matrix $A$ and a $3\times 2$ matrix $B$.  Check if the Cauchy--Binet formula is true.
+\item Pick a connected graph on $4$ vertices.  Pick a set $\alpha$ of $3$ edges such that $\alpha$ induces a spanning tree.  Observe $N'[:,\alpha]$.  Can you permute the rows and the columns to make it an upper triangular matrix?  (Therefore, the determinant is $\pm 1$.)
+\item Pick a connected graph on $4$ vertices.  Pick a set $\alpha$ of $3$ edges such that $\alpha$ contains a cycle.  Observe $N'[:,\alpha]$.  Can you find a vector $\bu$ with entries in $\{1,-1,0\}$ such that $N'[:,\alpha]\bu = \bzero$?  (Therefore, the determinant is $0$.)
+\item The number of spanning trees of a complete graph $K_n$ is also the number of labelled trees on $n$ vertices.  How many spanning trees does $K_n$ have?  (This number is called the \textbf{Cayley formula}.)
+\item If $G$ has no spanning tree, then $G$ is disconnected.  According to the matrix-tree theorem, $\det(L(1)) = 0$.  Prove, without using the matrix-tree theorem, that $\det(L(1)) = 0$ if the graph is disconnected.
+\end{enumerate}
+
+% \newpage
+% \section*{Questions to ponder}
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+
+\end{document}

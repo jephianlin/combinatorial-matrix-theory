@@ -1,0 +1,129 @@
+\documentclass{article}
+
+%%%PACKAGE
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%% \usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage{cite}
+%% \usepackage{enumerate}
+% \usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{systeme}
+%\usepackage{siunitx}
+% \usepackage{multicol}
+% \usepackage{systeme}
+
+% for drawing graphs
+\usepackage{tikz}
+% \tikzset{every picture/.style={thick}}
+\tikzset{every node/.style={draw, circle, inner sep = 2pt}}
+\usetikzlibrary{arrows}
+
+% for margins
+\usepackage[margin=1in]{geometry}
+
+% for font
+\usepackage{euler}
+\usepackage[OT1]{eulervm}
+\renewcommand{\rmdefault}{pplx}
+
+% \setlength{\parindent}{0pt}  %no indenting
+
+% MACROS
+\newcommand{\trans}{^\top}
+\newcommand{\adj}{^{\rm adj}}
+\newcommand{\cof}{^{\rm cof}}
+\newcommand{\inp}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\dunion}{\mathbin{\dot\cup}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+%\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Col}{\operatorname{Col}}
+\newcommand{\Row}{\operatorname{Row}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\vspan}{\operatorname{span}}
+% \newenvironment{sol}{\medskip\noindent {\bf Solution.}}{\newpage}
+\newcommand{\mystrut}{\rule[-.5\baselineskip]{0pt}{2\baselineskip}}
+% \newcommand{\mul}{\operatorname{mul}}
+
+%%%COMMENT
+\usepackage{soul}
+\usepackage{cancel}
+\newcommand{\rbf}[1]{\textbf{\color{red}#1}}
+
+%%%THEOREM
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{question}[theorem]{Question}
+
+% for title
+\title{Matrix-matrix multiplication}
+\date{\vspace{-1cm}}
+\begin{document}
+\maketitle
+\large
+
+Let $A = \begin{bmatrix} a_{ij} \end{bmatrix}$ and $B = \begin{bmatrix} b_{ij} \end{bmatrix}$ be two $n\times n$ matrices.  Then $AB$ is another $n\times n$ matrix whose $i,j$-entry is
+\[\sum_{k\in[n]}a_{ik}b_{kj}.\]
+
+Let $\Gamma_A$ and $\Gamma_B$ be the digraphs of $A$ and $B$, respectively.  Similar to the out-neighborhood, we define the \emph{in-neighborhood} of a vertex $j$ of a digraph $\Gamma$ as 
+\[N^-_\Gamma(v) = \{k : (k,j) \in E(\Gamma)\}.\]
+Thus, the $i,j$-entry of $AB$ is  
+\[\sum_{k\in N^+_{\Gamma_A}(i)\cap N^-_{\Gamma_B}(j)}a_{ik}b_{kj}.\]
+When $A = B$, the formula can be cleaner as follows.  
+\[\sum_{\substack{k\\ i\rightarrow k\rightarrow j}}a_{ik}a_{kj}.\]
+
+Moreover $\Gamma_A$ can be viewed as a weighted digraph, where $w(i,j) = a_{ij}$ is the weight on the edge $(i,j)$.  
+A \emph{walk} $W$ on $\Gamma_A$ is a sequence of vertices and edges
+\[v_0\rightarrow v_1\rightarrow \cdots \rightarrow v_r\]
+such that each $v_k$ is a vertex for $k=0,\ldots,r$ and $(v_k,v_{k+1})\in E(\Gamma_A)$ for each $k = 0,\ldots, r-1$.  The \emph{length} of $W$ is the number of edges on it.  The \emph{weight} of $W$ is the product of the weights of its edges, denoted by $w(W)$.  Thus, the $i,j$-entry of $A^r$ is 
+\[\sum_{W}w(W),\]
+where $W$ runs through all walks from $i$ to $j$ of length $r$ on $\Gamma_A$. 
+\section*{Problems}
+\begin{enumerate}
+\setlength\itemsep{2em}
+\item Write two $4\times 4$ matrices $A$ and $B$, draw the digraphs of them, and calculate $AB$ by the digraphs.
+\item Use the same $A$ you had, calculate $A^2$ and $A^3$.
+\item Let 
+\[A = \begin{bmatrix} 
+ 0 & 1 & 0 & 0 & 0 & 0 \\
+ 0 & 0 & 1 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 1 & 0 & 0 \\
+ 0 & 0 & 0 & 0 & 1 & 0 \\
+ 0 & 0 & 0 & 0 & 0 & 1 \\
+ 1 & 0 & 0 & 0 & 0 & 0 \\
+\end{bmatrix}\] 
+ be a permutation matrix.  Draw the digraphs of $A^2$, $A^3$, and $A^6$.
+\item When the matrix $A$ is symmetric, how would you define a walk and its weight on the simple graph of $A$?  How to calculate the $i,j$-entry of $A^r$?  What if $A$ is a symmetric matrix with zero diagonal?
+\end{enumerate}
+
+% \newpage
+% \section*{Questions to ponder}
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+
+\end{document}

@@ -1,0 +1,134 @@
+\documentclass{article}
+
+%%%PACKAGE
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%% \usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage{cite}
+%% \usepackage{enumerate}
+% \usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{systeme}
+%\usepackage{siunitx}
+% \usepackage{multicol}
+% \usepackage{systeme}
+
+% for drawing graphs
+\usepackage{tikz}
+% \tikzset{every picture/.style={thick}}
+\tikzset{every node/.style={draw, circle, inner sep = 2pt}}
+\usetikzlibrary{arrows}
+
+% for margins
+\usepackage[margin=1in]{geometry}
+
+% for font
+\usepackage{euler}
+\usepackage[OT1]{eulervm}
+\renewcommand{\rmdefault}{pplx}
+
+% \setlength{\parindent}{0pt}  %no indenting
+
+% MACROS
+\newcommand{\trans}{^\top}
+\newcommand{\adj}{^{\rm adj}}
+\newcommand{\cof}{^{\rm cof}}
+\newcommand{\inp}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\dunion}{\mathbin{\dot\cup}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+%\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Col}{\operatorname{Col}}
+\newcommand{\Row}{\operatorname{Row}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\vspan}{\operatorname{span}}
+% \newenvironment{sol}{\medskip\noindent {\bf Solution.}}{\newpage}
+\newcommand{\mystrut}{\rule[-.5\baselineskip]{0pt}{2\baselineskip}}
+% \newcommand{\mul}{\operatorname{mul}}
+\newcommand{\even}{\operatorname{even}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\iner}{\operatorname{iner}}
+
+%%%COMMENT
+\usepackage{soul}
+\usepackage{cancel}
+\newcommand{\rbf}[1]{\textbf{\color{red}#1}}
+
+%%%THEOREM
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{question}[theorem]{Question}
+
+% for title
+\title{Chromatic number}
+\date{\vspace{-1cm}}
+\begin{document}
+\maketitle
+\large
+
+Let $G$ be a graph on $n$ vertices and $A$ its adjacency matrix.  A $k$-proper coloring of $G$ is a partition of $V(G)$ into $X_1\dunion \cdots \dunion X_k$ such that each of $X_i$ is an independent set for $i = 1,\ldots, k$.  Equivalently, a partition $X_1\dunion \cdots \dunion X_k$ of $V(G)$ is a $k$-proper coloring if and only if $A$ can be written as 
+\[\begin{bmatrix}
+ O_{|X_1|} & ? & \cdots & ? \\
+ ? & O_{|X_2|} & \ddots & \vdots \\
+ \vdots & \ddots & \ddots & ? \\
+ ? & \cdots & ? & O_{|X_k|} 
+\end{bmatrix}.\]
+The \emph{chromatic number} of $G$ is the minimum $k$ such that $G$ has a $k$-proper coloring, denoted by $\chi(G)$.
+
+Let $G$ be a graph on $n$ vertices, $A$ its adjacency matrix, and $\lambda_1\leq \cdots \leq \lambda_n$ the eigenvalues of $A$.  The \textbf{Hoffman bound} states that 
+\[\chi(G) \geq 1 - \frac{\lambda_n}{\lambda_1}\]
+whenever $G$ contains at least an edge.  One of the proofs of the Hoffman bound utilizes the \emph{weight-regular partition}.  The sketch of the proof is as follows.
+\begin{enumerate}
+\item Suppose $\chi(G) = k$ and $X_1\dunion \cdots \dunion X_k$ is a $k$-proper coloring.  Let $\phi_1,\ldots,\phi_k$ be the corresponding characteristic vectors.
+\item Let $\bu$ be an eigenvector corresponding to $\lambda_n$.  Define $\bx_i$ as the entrywise product of $\bu$ and $\phi_i$.  If $\bx_i = \bzero$, replace it with $\phi_i$.
+\item Define an $k\times k$ matrix $C = \begin{bmatrix} c_{ij} \end{bmatrix}$ such that $c_{ij} = \frac{1}{\|\bx_i\|\|\bx_j\|}\bx_i\trans A\bx_j$.  Thus, the eigenvalues of $C$ interlace with the eigenvalues of $A$.  (Why?)  Let $\mu_1 \leq \cdots \leq \mu_k$ be the eigenvalues of $C$.
+\item Since $\bu$ is in the span of $\{\bx_i\}_{i=1}^k$, $\mu_k = \lambda_n$.  
+\item The diagonal entries of $C$ are zero, so 
+\[\begin{aligned} 
+ 0 = \tr(C) &= \mu_1 + \cdots + \mu_k \\
+ &\geq \lambda_1 + \cdots + \lambda_{k-1} + \lambda_n \\
+ &\geq (k-1)\lambda_1 + \lambda_n.
+\end{aligned}\]
+Therefore, $\chi(G) \geq 1 - \frac{\lambda_n}{\lambda_1}$.  
+\end{enumerate}
+
+\section*{Problems}
+\begin{enumerate}
+\setlength\itemsep{2em}
+\item Pick a graph, calculate its chromatic number and its eigenvalues, and then check if the Hoffman bound is tight.   
+\item Check if the Hoffman bound is tight for complete graph $K_n$ with $n\geq 2$.  
+\item Prove the Hoffman bound for bipartite graphs. 
+\item Prove the statement in step 3.
+\item Let $C$ be the matrix in the proof.  Find an eigenvector for $C$ with respect to $\lambda_n$.
+\end{enumerate}
+
+% \newpage
+% \section*{Questions to ponder}
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+
+\end{document}

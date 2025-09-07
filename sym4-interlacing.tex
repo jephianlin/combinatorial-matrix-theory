@@ -1,0 +1,114 @@
+\documentclass{article}
+
+%%%PACKAGE
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%% \usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage{cite}
+%% \usepackage{enumerate}
+% \usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{systeme}
+%\usepackage{siunitx}
+% \usepackage{multicol}
+% \usepackage{systeme}
+
+% for drawing graphs
+\usepackage{tikz}
+% \tikzset{every picture/.style={thick}}
+\tikzset{every node/.style={draw, circle, inner sep = 2pt}}
+\usetikzlibrary{arrows}
+
+% for margins
+\usepackage[margin=1in]{geometry}
+
+% for font
+\usepackage{euler}
+\usepackage[OT1]{eulervm}
+\renewcommand{\rmdefault}{pplx}
+
+% \setlength{\parindent}{0pt}  %no indenting
+
+% MACROS
+\newcommand{\trans}{^\top}
+\newcommand{\adj}{^{\rm adj}}
+\newcommand{\cof}{^{\rm cof}}
+\newcommand{\inp}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\dunion}{\mathbin{\dot\cup}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+%\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Col}{\operatorname{Col}}
+\newcommand{\Row}{\operatorname{Row}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\vspan}{\operatorname{span}}
+% \newenvironment{sol}{\medskip\noindent {\bf Solution.}}{\newpage}
+\newcommand{\mystrut}{\rule[-.5\baselineskip]{0pt}{2\baselineskip}}
+% \newcommand{\mul}{\operatorname{mul}}
+\newcommand{\even}{\operatorname{even}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\iner}{\operatorname{iner}}
+
+%%%COMMENT
+\usepackage{soul}
+\usepackage{cancel}
+\newcommand{\rbf}[1]{\textbf{\color{red}#1}}
+
+%%%THEOREM
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{question}[theorem]{Question}
+
+% for title
+\title{Interlacing}
+\date{\vspace{-1cm}}
+\begin{document}
+\maketitle
+\large
+
+Let $A = \begin{bmatrix} a_{ij} \end{bmatrix}$ be an $n\times n$ real symmetric matrix.  Let $\lambda_1 \leq \cdots \leq \lambda_n$ be the eigenvalues of $A$.  Let $B$ be an $(n-1)\times (n-1)$ principal submatrix of $A$ and $\mu_1 \leq \cdots \leq \mu_{n-1}$ its eigenvalues.  Then 
+\[\lambda_1 \leq \mu_1 \leq \lambda_2 \leq \cdots \leq \lambda_n.\]
+More generally, if $B$ is an $k\times k$ principal submatrix of $A$ with eigenvalues $\mu_1 \leq \cdots \leq \mu_k$, then 
+\[\lambda_i \leq \mu_i \leq \lambda_{n - (k-i)}.\]
+  
+\section*{Problems}
+\begin{enumerate}
+\setlength\itemsep{2em}
+\item Pick a $3\times 3$ real symmetric matrix $A$ and one of its $2\times 2$ principal submatrix $B$.  Calculate their eigenvalues to witness the interlacing property.
+\item Let $A$ be an $n\times n$ real symmetric matrix and $B$ one of its $(n-1)\times (n-1)$ principal submatrix.  If $\lambda$ is an eigenvalue of $A$ of multiplicity $m$, explain why $\lambda$ is an eigenvalue of multiplicity $m-1$, $m$, or $m+1$.  (When $\lambda$ is not an eigenvalue of $B$, we vaguely say its multiplicity is $0$.) 
+\item Explain why $\lambda_1 \leq a_i \leq \lambda_n$ for each $i = 1,\ldots, n$ using the interlacing property.
+\item Let $A$ be an $n\times n$ real symmetric matrix and $Q$ an $n\times n$ orthogonal matrix.  (That is, $QQ\trans = Q\trans Q = I$.)  Let $S$ be the $n\times k$ submatrix of $Q$ induced on the first $k$ columns.  Let $B = S\trans AS$ and $\mu_1 \leq \cdots \leq \mu_k$ its eigenvalues.  Explain why 
+\[\lambda_i \leq \mu_i \leq \lambda_{n - (k-i)}.\]
+\item Explain why $\lambda_1 \leq \frac{1}{n}\sum_{i=1}^n\sum_{j=1}^n a_{i,j} \leq \lambda_n$ using the interlacing property.
+\end{enumerate}
+
+% \newpage
+% \section*{Questions to ponder}
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+
+\end{document}
