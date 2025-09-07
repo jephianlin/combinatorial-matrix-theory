@@ -90,40 +90,40 @@
 \large
 
 Let $G$ be a graph on $n$ vertices and $A$ its adjacency matrix.  The \emph{adjacency characteristic polynomial} of $G$ is 
-\[\det(A - xI) = S_0(-x)^n + S_1(-x)^{n-1} + \cdots + S_n.\]
-Each of $S_k$ can be calculated by combinatorial properties of $\Gamma(G)$ as
-\[S_k = \sum_{H\in\mathfrak{E}_k(\Gamma(G))} \sgn(H)w(H) = \sum_{H\in\mathfrak{E}_k(\Gamma(G))}(-1)^{k+c(H)}w(H).\]
+\[\det(A - xI) = s_0(-x)^n + s_1(-x)^{n-1} + \cdots + s_n.\]
+Each of $s_k$ can be calculated by combinatorial properties of $\Gamma(G)$ as
+\[s_k = \sum_{H\in\mathfrak{E}_k(\Gamma(G))} \sgn(H)w(H) = \sum_{H\in\mathfrak{E}_k(\Gamma(G))}(-1)^{k+c(H)}w(H).\]
 All we need to do is to translate the digraph setting into the setting of simple graph $G$.  
 
 Let $\alpha\subseteq[n]$ with $|\alpha| = k$.  An elementary subgraph of $\Gamma(G)$ on $\alpha$ corresponds to a subgraph of $G$ on $\alpha$ whose components are either $K_2$ or a cycle.  A such subgraph is called an \emph{elementary subgraph of $G$ on $\alpha$}.  Let $\mathfrak{E}_\alpha(G)$ be the set of all elementary subgraph of $G$ on $\alpha$ and define $\mathfrak{E}_k(G) = \bigcup_{\substack{\alpha\subseteq [n]\\|\alpha| = k}}\mathfrak{E}_\alpha(G)$.    
 
 For any $H\in\mathfrak{G}_\alpha(G)$, let $c(H)$ be the number of components of $H$, $c_2(H)$ be the number of components that is $K_2$, and $c_3(H)$ be the number of components that is a cycle (of length $\geq 3$).  Thus, each $H$ corresponds to $2^{c_3(H)}$ elementary subgraphs of $\Gamma$ on $\alpha$, each has weight $1$ and sign $(-1)^{k + c(H)}$.  Therefore, 
-\[S_k = \sum_{H\in\mathfrak{E}_k(\Gamma(G))} \sgn(H)w(H) = \sum_{H\in\mathfrak{E}_k(G)}(-1)^{k+c(H)}2^{c_3(H)}.\]
+\[s_k = \sum_{H\in\mathfrak{E}_k(\Gamma(G))} \sgn(H)w(H) = \sum_{H\in\mathfrak{E}_k(G)}(-1)^{k+c(H)}2^{c_3(H)}.\]
 
 In particular, 
 \[\begin{aligned}
-S_0 &= 1, \\
-S_1 &= 0, \\
-S_2 &= -m, \\
-S_3 &= 2t,
+s_0 &= 1, \\
+s_1 &= 0, \\
+s_2 &= -m, \\
+s_3 &= 2t,
 \end{aligned}\]
 where $m$ is the number of edges on $G$ and $t$ is the number of triangles on $G$.
 
 On the other hand, 
 \[\begin{aligned}
-\tr(A) &= 0 = S_1, \\
-\tr(A^2) &= 2m = -2S_2, \\
-\tr(A^3) &= 6t = 3S_3.
+\tr(A) &= 0 = s_1, \\
+\tr(A^2) &= 2m = -2s_2, \\
+\tr(A^3) &= 6t = 3s_3.
 \end{aligned}\]
 
 \section*{Problems}
 \begin{enumerate}
 \setlength\itemsep{2em}
 \item Pick a simple graph on $4$ vertices, list all elements in $\mathfrak{E}_k(G)$ for each $k = 0,1,2,3,4$, and calculate the adjacency characteristic polynomial of $G$ using the elementary subgraphs.
-\item Use the formula for $S_k$ to derive $S_2 = -m$.  
-\item Use the formula for $S_k$ to derive $S_3 = 2t$.  
+\item Use the formula for $s_k$ to derive $s_2 = -m$.  
+\item Use the formula for $s_k$ to derive $s_3 = 2t$.  
 \item The \emph{girth} of a simple graph is the length of its shortest cycle.  If a graph $G$ has girth $g$, what can you say about its adjacency characteristic polynomial?
-\item Let $A$ be a real symmetric matric with eigenvalues $\lambda_1,\ldots, \lambda_n$.  Refresh yourself with the formulas of $S_0,\ldots, S_3$ and $\tr(A),\tr(A^2),\tr(A^3)$ using the eigenvalues.
+\item Let $A$ be a real symmetric matric with eigenvalues $\lambda_1,\ldots, \lambda_n$.  Refresh yourself with the formulas of $s_0,\ldots, s_3$ and $\tr(A),\tr(A^2),\tr(A^3)$ using the eigenvalues.
 \end{enumerate}
 
 % \newpage
